@@ -15,10 +15,12 @@ export default function Tags({ tags }) {
 	return (
 		<ul
 			css={`
-				margin-top: 0.6rem;
-				padding-left: 0.6rem;
+				margin-top: 1.5rem;
+				padding-top:1.5rem;
+				border-top:solid 1px var(--separatorColor);
+
+				padding-left: 0;
 				list-style-type: none;
-				border-left: 4px solid var(--lightColor);
 				line-height: 1.4rem;
 				img {
 					opacity: 0.7;
@@ -31,15 +33,36 @@ export default function Tags({ tags }) {
 				<li
 					key={k + v}
 					css={`
+
+						min-height:28px;
+						display:flex;
+						align-items:center;
+						flex-direction:row;
+						gap:4px;
+						
 						${isSecondary(Object.entries(raw)[0]) &&
-						`font-size: 80%; order: ${1000 + i}`}
+						`
+						font-size: 0.8165rem; 
+						order: ${1000 + i};
+						min-height:26px;
+						`}
 					`}
-				>
-					<Icons tags={raw} />
-					<span>
-						<span>{tagNameCorrespondance(k)}</span> :{' '}
-						<span>{tagValueCorrespondance(v)}</span>
-					</span>
+				>	
+				
+						<Icons tags={raw}/>
+						
+						<span css={`
+							color:var(--lighterTextColor);
+							`}>
+							{tagNameCorrespondance(k)}
+							{' '}:
+						</span>
+
+						<span css={`
+							font-weight:700;
+							margin-left:4px;
+							`}>{tagValueCorrespondance(v)}
+						</span>
 				</li>
 			))}
 		</ul>
@@ -82,29 +105,51 @@ export function SoloTags({ tags, iconsOnly, compact }) {
 				list-style-type: none;
 				display: flex;
 				align-items: center;
+				overflow: scroll;
+				white-space: nowrap;
+				scrollbar-width: none;
+				position:relative;
+				padding-right:1rem;
+
+				gap: ${compact ? '0' : '12px'};
+
 				> li {
-					margin-right: ${compact ? '0' : '0.6rem'};
 					display: flex;
 					align-items: center;
 				}
-				overflow: scroll;
-				white-space: nowrap;
-				margin-bottom: 0.2rem;
-				scrollbar-width: none;
+
 				&::-webkit-scrollbar {
 					width: 0px;
 					background: transparent; /* Disable scrollbar Chrome/Safari/Webkit */
 				}
-				opacity: 0.7;
+					
 				> li > span {
 					line-height: 1.4rem;
 				}
 			`}
 		>
 			{tags.map(([raw, tag]) => (
-				<li key={tag}>
+				<li key={tag} css={`
+					display:flex;
+					align-items:center;
+					gap:6px;
+				`}>
+					<span css={`
+						width:28px;
+						height:28px;
+						border-radius:6px;
+						background:var(--color90);
+						display:flex;
+						align-items:center;
+						justify-content:center;
+					`}>
 					<Icons tags={raw} />
-					{!iconsOnly && <span>{tag}</span>}
+					</span>
+
+					{!iconsOnly && <span css={`
+						color:var(--linkColor);
+						font-weight:600;
+					`}>{tag}</span>}
 				</li>
 			))}
 		</ul>

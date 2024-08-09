@@ -7,25 +7,29 @@ export default function OsmLinks({
 	return (
 		<div
 			css={`
+				margin-top:1rem;
 				display: flex;
-				margin-top: 2rem;
-				margin-bottom: 0.2rem;
-				justify-content: center;
+				flex-direction: column;
 				align-items: center;
-				img {
-					width: 1.6rem;
-					height: auto;
-					margin-right: 0.4rem;
-					vertical-align: middle;
-				}
-				background: white;
-				border: 1px solid var(--lightestColor);
-				border-radius: 0.4rem;
-				padding: 0.3rem 0.8rem;
-				font-size: 80%;
+				gap:8px;
+				
 				a {
-					color: #333;
-					text-decoration: none;
+					width:100%;
+					padding:10px 16px;
+					background:var(--color95);
+					border-radius:10px;
+					color:var(--linkColor);
+					font-weight:bold;
+					text-align:center;
+					text-decoration:none;
+					display:flex;
+					align-items:center;
+					justify-content:center;
+					gap:6px;
+
+					&:hover {
+					background:var(--color90);
+					}
 				}
 			`}
 		>
@@ -40,7 +44,9 @@ export default function OsmLinks({
 					height="30"
 					alt="Logo d'OpenStreetMap"
 				/>
+				Voir la fiche OpenStreetMap
 			</a>
+
 			<a
 				href={`https://openstreetmap.org/edit?${featureType}=${id}`}
 				target="_blank"

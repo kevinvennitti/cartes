@@ -2,6 +2,9 @@ import getIcons from './getIcons'
 
 export default function Icons({ tags }) {
 	const icons = typeof tags === 'string' ? [tags] : getIcons(tags)
+	
+	if (icons.length === 0) return null;
+
 	return (
 		<ul
 			css={`
@@ -18,8 +21,8 @@ export default function Icons({ tags }) {
 				filter: invert(16%) sepia(24%) saturate(3004%) hue-rotate(180deg)
 					brightness(89%) contrast(98%);
 				img {
-					width: 1.4rem;
-					height: 1.4rem;
+					width: 1.2rem;
+					height: 1.2rem;
 					filter: invert(1);
 					vertical-align: sub;
 				}
@@ -32,4 +35,5 @@ export default function Icons({ tags }) {
 			))}
 		</ul>
 	)
+
 }

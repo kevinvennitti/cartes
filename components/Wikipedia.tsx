@@ -28,64 +28,71 @@ export default function Wikipedia({ name }) {
 	return (
 		<div
 			css={`
-			margin-top: .4rem;
+				margin-top: 1.5rem;
+				padding-top:1.5rem;
+				border-top:solid 1px var(--separatorColor);
+				
 				position: relative;
-				${
-					shortenText?.length > 100 &&
-					`
-				&:after {
-					position: absolute;
-					bottom: 0;
-					height: 100%;
-					width: 100%;
-					content: '';
-					background: linear-gradient(
-						to bottom,
-						color-mix(in srgb, var(--lightestColor2) 0%, transparent) 20%,
-						color-mix(in srgb, var(--lightestColor2) 100%, transparent) 80%
-					);
-					pointer-events: none; /* so the text is still selectable */
-				`
-				}
+				
 				}
 				p {
-					line-height: 1.2rem;
+					line-height: 1.3rem;
+					margin-bottom:0;
+					position:relative;
+
 					${
-						shortenText?.length > 100
-							? ''
-							: `
-				    margin-bottom: .8rem`
+						shortenText?.length > 100 &&
+						`
+					&:after {
+						position: absolute;
+						bottom: 0;
+						left: 0;
+						height: 100%;
+						max-height:2.5rem;
+						width: 100%;
+						content: '';
+						background: linear-gradient(
+							to bottom,
+							color-mix(in srgb, white 0%, transparent) 20%,
+							color-mix(in srgb, white 100%, transparent) 80%
+						);
+						pointer-events: none; /* so the text is still selectable */
+					`
 					}
 				}
-				> p > img {
-					vertical-align: text-bottom;
-					margin-right: 0.3rem;
-				}
 				p > a {
-				${
-					shortenText?.length > 100
-						? `
-					z-index: 2;
-					position: absolute;
-					right: 0;
-					`
-						: `float: right; `
-				};}
+				
 			`}
 		>
-			<p>
+			<div css={`
+					display:flex;
+					align-items:center;
+					gap:6px;
+					margin-bottom:6px;
+				`}>
 				<Image
 					src={wikipediaLogo}
 					alt="Logo de Wikipedia"
 					width="25"
 					height="25"
 				/>
-				{shortenText}
-
 				<a href={url} target="_blank">
 					<small>Wikipedia</small>
 				</a>
+			</div>
+			<p>
+
+				{shortenText}
+
 			</p>
+
+			<a href={url} target="_blank" css={`
+					font-weight:600;
+					color:var(--linkColor);
+					text-decoration:none;
+				`}>
+				Lire l'article
+			</a>
 		</div>
 	)
 }

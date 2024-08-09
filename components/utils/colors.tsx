@@ -59,20 +59,30 @@ const deriveAnalogousPalettes = (hex: string) => {
 const generateTheme = (themeColor?: string) => {
 	const // Use the default theme color if the host page hasn't made a choice
 		color = themeColor || '#2988e6',
+
+		lighterColor = '#7F879E', // WCAG: AAA
+		textColor = '#071E40', // WCAG: AAA
+		lighterTextColor = '#51596C', // WCAG: AAA
+		separatorColor = '#E4EFF5',
+		linkColor = '#1754B0',
+
+		color60 = '#1975D2', // WCAG: AAA
+		color90 = '#CBE7F6',
+		color95 = '#E4EFF5',
+		color99 = '#F4F8FB',
+
 		lightColor = '#57bff5' || lightenColor(color, 10),
 		darkColor = '#185abd' || lightenColor(color, -20),
-		lighterColor = lightenColor(color, 30),
 		lightestColor = lightenColor(color, 40),
 		lightestColor2 = lightenColor(color, 50),
 		darkestColor = lightenColor(color, -45),
 		darkerColor = lightenColor(color, -35),
 		darkerColor2 = lightenColor(color, -40),
 		grayColor = '#00000099',
-		textColor = findContrastedTextColor(color, true), // the 'simple' version feels better...
+		// textColor = findContrastedTextColor(color, true), // the 'simple' version feels better...
 		inverseTextColor = textColor === '#ffffff' ? '#000' : '#fff',
 		lightenTextColor = (textColor: string) =>
 			textColor === '#ffffff' ? 'rgba(255, 255, 255, .7)' : 'rgba(0, 0, 0, .7)',
-		lighterTextColor = darkColor + 'cc',
 		lighterInverseTextColor = lightenTextColor(inverseTextColor),
 		textColorOnWhite = textColor === '#ffffff' ? color : '#333',
 		palettes = deriveAnalogousPalettes(color),
@@ -95,6 +105,13 @@ const generateTheme = (themeColor?: string) => {
 		darkestColor,
 		darkerColor,
 		darkerColor2,
+
+		linkColor,
+		separatorColor,
+		color60,
+		color90,
+		color95,
+		color99,
 		//palettes,
 	}
 }

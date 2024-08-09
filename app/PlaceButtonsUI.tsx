@@ -8,30 +8,45 @@ export const PlaceButtonList = styled.ul`
 	margin: 1vh auto;
 	display: flex;
 	align-items: center;
+	gap:6px;
 `
 
 export const PlaceButton = styled.li`
-	margin-right: 0.6rem;
-	button {
-		border-radius: 0.6rem;
-		background: var(--color);
-		width: 5rem;
-		height: 4.2rem;
-		padding: 0.5rem 0;
-		color: white;
+	flex:1;
+	text-decoration:none;
 
-		> div:first-child  {
-			background: white;
-			height: 1.8rem;
-			width: 1.8rem;
-			border-radius: 1rem;
-			margin: 0 auto 0.2rem;
+	button {
+		width:100%;
+		padding:10px 16px;
+		background:var(--color95);
+		border-radius:10px;
+		color:var(--linkColor);
+		font-weight:600;
+		text-align:center;
+		text-decoration:none;
+		display:flex;
+		align-items:center;
+		justify-content:center;
+		gap:6px;
+
+		&:hover {
+			background:var(--color90);
+		}
+
+		> div:first-child {
+			height: 24px;
+			width: 24px;
+
 			img,
 			svg {
 				width: 100%;
 				height: 100%;
-				padding: 0.25rem;
 			}
 		}
+	}
+
+	:first-child button {
+		background:var(--color60);
+		color:white;
 	}
 `

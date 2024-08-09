@@ -22,7 +22,7 @@ export const MapContainer = styled.div`
 		bottom: 10px;
 		z-index: 999;
 	}
-	color: var(--darkestColor);
+	color: var(--textColor);
 `
 
 export const ContentWrapper = styled.div`
@@ -39,17 +39,16 @@ export const ModalCloseButton = (props) => (
 	</ModalCloseButtonButton>
 )
 export const ModalCloseButtonButton = styled.button`
-	position: absolute;
-	top: 0rem;
-	right: 0rem;
+	// position: absolute;
+	// top: 0rem;
+	// right: 0rem;
 	margin: 0;
-	background: var(--darkerColor);
+	background: var(--linkColor);
 	color: var(--lightestColor);
 	border-radius: 2rem;
 	font-size: 150%;
 	width: ${size}rem;
 	height: ${size}rem;
-	line-height: ${size}rem;
 
 	text-align: center;
 	cursor: pointer;
@@ -57,6 +56,7 @@ export const ModalCloseButtonButton = styled.button`
 	display: flex;
 	align-items: center;
 	justify-content: center;
+
 	> img {
 		width: 1;
 		margin: 0;

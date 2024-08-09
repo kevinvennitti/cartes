@@ -8,7 +8,7 @@ import turfDistance from '@turf/distance'
 import Link from 'next/link'
 import useSetSearchParams from './useSetSearchParams'
 import { capitalise0, sortBy } from './utils/utils'
-import { OpenIndicator, getOh } from '@/app/osm/OpeningHours'
+import { OpenIndicator, OpenIndicatorInListItem, getOh } from '@/app/osm/OpeningHours'
 import { categoryIconUrl } from '@/app/QuickFeatureSearch'
 
 // This is very scientific haha
@@ -92,20 +92,22 @@ export default function SimilarNodes({ node }) {
 	return (
 		<section
 			css={`
-				margin-top: 2rem;
-				background: white;
-				border: 1px solid var(--lightestColor);
-				border-radius: 0.4rem;
-				padding: 0.3rem 0.8rem;
+				margin-top: 1.5rem;
+				padding-top:1.5rem;
+				border-top:solid 1px var(--separatorColor);
+				
 				h3 {
-					margin-top: 0.4rem;
+					margin:0 0 0.75rem 0;
+					font-size:1.25rem;
+					letter-spacing:-0.01em;
+					font-weight:700;
 				}
 			`}
 		>
 			{closestFeatures && (
 				<>
 					{' '}
-					<h3>{title} proches :</h3>
+					<h3>{title} proches</h3>
 					<NodeList
 						nodes={closestFeatures.slice(0, 10)}
 						setSearchParams={setSearchParams}
@@ -133,8 +135,10 @@ export default function SimilarNodes({ node }) {
 const NodeList = ({ nodes, setSearchParams, isOpenByDefault }) => (
 	<ul
 		css={`
-			margin-left: 0.2rem;
 			list-style-type: none;
+			display:flex;
+			flex-direction:column;
+			gap:4px;
 		`}
 	>
 		{nodes.map((f) => {
@@ -142,18 +146,14 @@ const NodeList = ({ nodes, setSearchParams, isOpenByDefault }) => (
 			const oh = f.tags.opening_hours
 			const { isOpen } = oh ? getOh(oh) : {}
 			return (
-				<li key={f.id}>
-					{!isOpenByDefault &&
-						(oh == null ? (
-							<span
-								css={`
-									display: inline-block;
-									width: 1.8rem;
-								`}
-							></span>
-						) : (
-							<OpenIndicator isOpen={isOpen === 'error' ? false : isOpen} />
-						))}
+				<li key={f.id} css={`
+					display:flex;
+					align-items:center;
+					justify-content:space-between;
+					gap:16px;
+					min-height:28px;
+				`}>
+					
 					<Link
 						href={setSearchParams(
 							{
@@ -166,10 +166,49 @@ const NodeList = ({ nodes, setSearchParams, isOpenByDefault }) => (
 							},
 							true
 						)}
+
+						css={`
+							font-weight:bold;
+							color:var(--textColor) !important;
+							text-decoration:none;
+							line-height:120%;
+							display:flex;
+							align-items:center;
+							justify-content:space-between;
+						`}
 					>
+						<div css={`
+							margin-right:8px;
+							width:36px;
+							height:36px;
+							background:var(--color60);
+							border-radius:8px;
+							flex:none;
+						`}>
+
+						</div>
+
 						{f.tags.name}
 					</Link>{' '}
-					<small>
+					<small css={`
+							flex:none;
+							display:flex;
+							align-items:center;
+							gap:4px;
+						`}>
+						
+						{!isOpenByDefault &&
+						(oh == null ? (
+							<span
+								css={`
+									display: inline-block;
+									width: 1.8rem;
+								`}
+							></span>
+						) : (
+							<OpenIndicatorInListItem isOpen={isOpen === 'error' ? false : isOpen} />
+						))}
+							
 						à {humanDistance[0]} {humanDistance[1]}
 					</small>
 				</li>

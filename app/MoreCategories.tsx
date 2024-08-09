@@ -40,7 +40,7 @@ export default function MoreCategories({
 						margin: 0.2rem 0.2rem;
 						padding: 0rem 0.4rem;
 						line-height: 1.5rem;
-						border-radius: 0.2rem;
+						border-radius: 0.4rem;
 						background: white;
 						border: 2px solid var(--lighterColor);
 						white-space: nowrap;

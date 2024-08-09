@@ -38,6 +38,7 @@ export const tagNameCorrespondance = (key: string) => {
 		'brand:website': 'Site de la marque',
 		'building:architecture': 'Style architectural',
 		'building:levels': "Nombre d'étages",
+		'building:part': 'Partie d\'un bâtiment',
 		bulk_purchase: 'Achat en vrac',
 		'capacity:disabled': 'Place de parking PMR',
 		'check_date:opening_hours': 'Horaires vérifiés le',
@@ -52,7 +53,7 @@ export const tagNameCorrespondance = (key: string) => {
 		old_name: 'Ancien nom',
 		'opening_hours:emergency': "Horaires en cas d'urgence",
 		'opening_hours:signed': 'Horaires affichés',
-		pastry: 'Patisserie',
+		pastry: 'Pâtisserie',
 		'payment:card': 'Paiement par carte',
 		'payment:cash': 'Paiement en liquide',
 		'payment:contactless': 'Paiement sans contact',
@@ -71,8 +72,19 @@ export const tagNameCorrespondance = (key: string) => {
 		'ref:FR:NAF': 'Code NAF',
 		'ref:FR:FANTOIR': 'Code FANTOIR',
 		'ref:FR:FINESS': 'Code FINESS',
-		passenger_information_display: "écran d'information voyageur",
+		passenger_information_display: "Écran d'information voyageur",
 		'survey:date': 'Dernière date de vérification',
+
+		'STIF:zone': 'Zone STIF',
+		'subway': 'Métro',
+		'train': 'Train',
+		'type:RATP': 'Infrastructure RATP',
+		'station': 'Type de station',
+		'ref:FR:RATP': 'Code RATP',
+		'ref:FR:STIF': 'Code STIF',
+		'note:fr' : 'Information',
+		'roof:shape': 'Forme du toit',
+		'internet_access:operator': 'Fournisseur d\'accès Internet',
 	}[key]
 	return found || key
 }
@@ -80,6 +92,8 @@ export const tagValueCorrespondance = (key: string) => {
 	const found = {
 		children: 'Enfant',
 		only: 'Uniquement',
+		subway: 'Métro',
+		metro: 'Métro',
 	}[key]
 	return found || key
 }

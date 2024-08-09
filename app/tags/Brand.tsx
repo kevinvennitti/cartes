@@ -9,7 +9,10 @@ export default function Brand({ brand, brandWikidata, brandWikipedia }) {
 		url = `https://${lang}.wikipedia.org/wiki/${name}`
 
 	return (
-		<div>
+		<div css={`
+			display:flex;
+			align-items: center;
+		`}>
 			Marque :&nbsp;
 			<img
 				src={'/wikipedia.svg'}
@@ -30,9 +33,11 @@ export default function Brand({ brand, brandWikidata, brandWikipedia }) {
 
 export const Wikidata = ({ id }) => (
 	<span
-		style={css`
-			margin-left: 0.8rem;
-		`}
+	css={`
+		display:flex;
+		align-items: center;
+		gap:6px;
+	`}
 	>
 		<img
 			src={'/wikidata.svg'}

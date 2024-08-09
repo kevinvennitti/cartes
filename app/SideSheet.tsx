@@ -5,10 +5,10 @@ export default function SideSheet(props) {
 	return (
 		<div
 			css={`
-				background-color: var(--lightestColor2) !important;
+				background-color: white !important;
 				width: 26rem;
 				margin-top: 1rem;
-				padding: 0.4rem 0.6rem;
+				padding: 1rem 1rem;
 				border-radius: 0.6rem;
 				max-height: 90vh;
 				overflow: scroll;

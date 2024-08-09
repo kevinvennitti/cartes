@@ -12,11 +12,15 @@
 
 html,
 body {
-	font-family: Helvetica, Arial, sans-serif;
+	/* CSS system font stack
+	 * https://css-tricks.com/snippets/css/system-font-stack/
+	 * */
+	font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+
 	max-width: 100vw;
 	height: 100%;
-	font-size: 100%;
-	line-height: 1.7rem;
+	font-size: 16px;
+	line-height: 1.5rem;
 
 	/* contain overscroll behaviour only in vertical direction
 	 * https://stackoverflow.com/questions/36212722/how-to-prevent-pull-down-to-refresh-of-mobile-chrome
@@ -119,7 +123,7 @@ h4,
 h5,
 h6 {
 	color: inherit;
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 	font-weight: 300;
 	scroll-margin-top: 1rem; /* Add a margin for anchor links */
 }
@@ -130,6 +134,12 @@ p {
 small {
 	line-height: 1rem;
 	display: inline-block;
+	color:var(--lighterTextColor);
+	font-size:0.8125rem;
+}
+a small {
+	color:var(--linkColor);
+	font-weight:600;
 }
 
 blockquote {
@@ -161,4 +171,6 @@ button:enabled {
 
 details > summary {
 	cursor: pointer;
+	font-weight:700;
+	margin-bottom:.5rem;
 }

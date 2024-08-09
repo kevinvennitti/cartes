@@ -87,9 +87,10 @@ export const OpeningHours = ({ opening_hours }) => {
 	return (
 		<div
 			css={`
-				margin: 0.2rem 0;
+				margin: 0;
 				display: flex;
 				align-items: center;
+				
 				summary {
 					list-style-type: none;
 					display: flex;
@@ -102,9 +103,9 @@ export const OpeningHours = ({ opening_hours }) => {
 					<OpenIndicator isOpen={isOpen === 'error' ? false : isOpen} />{' '}
 					{isOpen === 'error' && <span>Problème dans les horaires</span>}
 					{nextChange === 'error' ? null : !nextChange ? (
-						<span>Ouvert 24/24 7j/7</span>
+						<span css={`color:#07643C;`}>Ouvert 24/24 7j/7</span>
 					) : (
-						<span>
+						<span css={`color:${isOpen ? '#07643C' : '#D6162D'};`}>
 							{isOpen ? 'Ouvert' : 'Fermé'} jusqu'à {formatDate(nextChange)}
 						</span>
 					)}
@@ -165,12 +166,36 @@ export const OpenIndicator = ({ isOpen }) => (
 	<span
 		css={`
 			display: inline-block;
-			margin: 0 0.4rem;
+			margin: 0 0.4rem 0 0;
 			width: 1rem;
 			height: 1rem;
 			border-radius: 2rem;
-			background: ${isOpen ? '#37c267' : '#b5325d'};
+			background: ${isOpen ? '#07643C' : '#D6162D'};
 		`}
 		title={isOpen ? 'Ouvert actuellement' : 'Fermé actuellement'}
 	></span>
+)
+
+export const OpenIndicatorInListItem = ({ isOpen }) => (
+	<span css={`
+		display:flex;
+		flex-direction:row;
+		align-items:center;
+		color: ${isOpen ? '#07643C' : '#D6162D'};
+		margin-right:4px;
+	`}>
+		<span
+			css={`
+				display: inline-block;
+				margin-right:6px;
+				width: 9px;
+				height: 9px;
+				border-radius: 2rem;
+				opacity:.7;
+				background: ${isOpen ? '#07643C' : '#D6162D'};
+			`}
+			title={isOpen ? 'Ouvert' : 'Fermé'}
+		></span>
+		{isOpen ? 'Ouvert' : 'Fermé'}
+	</span>
 )
