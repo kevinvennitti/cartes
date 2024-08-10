@@ -79,25 +79,34 @@ export const tagNameCorrespondance = (key: string) => {
 		'STIF:zone': 'Zone STIF',
 		'subway': 'Métro',
 		'train': 'Train',
+		'bus': 'Bus',
 		'type:RATP': 'Infrastructure RATP',
 		'station': 'Type de station',
 		'ref:FR:RATP': 'Code RATP',
 		'ref:FR:STIF': 'Code STIF',
+		'ref:FR:STIF:stop_id': 'ID STIF de l\'arrêt',
 		'note:fr' : 'Information',
 		'roof:shape': 'Forme du toit',
 		'internet_access:operator': 'Fournisseur d\'accès Internet',
 		'source:population': 'Source des données de la population',
+		'source:wheelchair': 'Source de l\'accessibilité PMR',
 		'year': 'Année',
 		'phone:for_group': 'Numéro de téléphone pour les groupes',
+		'route_ref': 'Ligne(s) de bus à l\'arrêt',
 	}[key]
 	return found || key
 }
-export const tagValueCorrespondance = (key: string) => {
-	const found = {
+export const tagValueCorrespondance = (key: string, tagName: string) => {
+	const translations = {
 		children: 'Enfant',
 		only: 'Uniquement',
 		subway: 'Métro',
 		metro: 'Métro',
-	}[key]
-	return found || key
+	}
+
+	const formats = {
+		'route_ref': (v) => v.split(';').join(', '),
+	}
+	
+	return formats[tagName] ? formats[tagName](key) : (translations[key] ?? key)
 }

@@ -64,7 +64,7 @@ export default function Tags({ tags }) {
 
 						<span css={`
 							font-weight:700;
-							`}>{tagValueCorrespondance(v)}
+							`}>{tagValueCorrespondance(v, k)}
 						</span>
 				</li>
 			))}
