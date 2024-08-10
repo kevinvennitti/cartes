@@ -2,6 +2,7 @@
 
 import styled from 'styled-components'
 import { buildAddress } from './osm/buildAddress'
+import Image from 'next/image'
 
 export const addressKeys = [
 	'addr:place',
@@ -17,17 +18,32 @@ export const addressKeys = [
 ]
 
 export default function Address({ tags, noPrefix }) {
-	return (
+	const address = buildAddress(tags, noPrefix);
+
+	return (address && (
 		<address
 			css={`
-				line-height: 1.4rem;
-				font-size: 90%;
-				font-style: normal;
+				color:var(--lighterTextColor);
+				font-style:normal;
+				display:flex;
+				align-items:center;
+				gap:6px;
+				width:fit-content;
 			`}
 		>
-			{buildAddress(tags, noPrefix)}
+			<Image
+				src="/ui/address.svg"
+				width="20"
+				height="20"
+				alt="Icône Adresse"
+				css={`
+					filter: invert(52%) sepia(31%) saturate(231%) hue-rotate(187deg) brightness(96%) contrast(85%);
+				`}
+			/>
+
+			{address}
 		</address>
-	)
+	))
 }
 
 export const AddressDisc = ({ t, noPrefix = false }) => {
