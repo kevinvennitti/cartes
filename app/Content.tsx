@@ -132,7 +132,7 @@ export default function Content({
 
 	// TODO: dirty integration from OsmFeature.tsx
 
-	const { leisure } = tags
+	const { leisure } = tags || {};
 
 	const {
 		description,
@@ -167,8 +167,12 @@ export default function Content({
 
 	const frenchAdminLevel = getFrenchAdminLevel(tags, adminLevel)
 
-	const phone = phone1 || phone2 || phone3,
-		website = website1 || website2
+	// could have multiple phone numbers, format: 
+	// +33 1 23 45 67 88;+33 1 23 45 67 89 (semicolon separated)
+	const phone = phone1 || phone2 || phone3;
+	const website = website1 || website2
+
+	const phones = phone ? phone.split(';') : [];
 
 	const name = getName(tags)
 	const nameKeys = getNameKeys(tags)
@@ -450,7 +454,7 @@ export default function Content({
 										<li key={key}>
 											<span
 												css={`
-													color: gray;
+													color: var(--lighterTextColor);
 												`}
 											>
 												{key.replace('name:', '')}
@@ -464,20 +468,31 @@ export default function Content({
 
 						<div>
 							{nameBrezhoneg && nameBrezhoneg !== name && (
-								<small>
+								<small css={`
+									color:var(--lighterTextColor);
+									text-decoration:none;
+									display:flex;
+									align-items:center;
+									gap:6px;
+									width:fit-content;
+								`}>
 									<Emoji extra="1F3F4-E0066-E0072-E0062-E0072-E0065-E007F" />{' '}
 									{nameBrezhoneg}
 								</small>
 							)}
 
+							{opening_hours && <OpeningHours opening_hours={opening_hours} />}
 			
 							{description && <small>{description}</small>}
+
 							{adminLevel && !frenchAdminLevel && (
 								<div>
 									<span>Niveau administratif : {adminLevel}</span>
 								</div>
 							)}
+
 							<Address tags={tags} />
+
 							{tags.uic_ref && (
 								<GareInfo
 									{...{
@@ -486,6 +501,7 @@ export default function Content({
 									}}
 								/>
 							)}
+
 
 							{mérimée && (
 								<a
@@ -496,17 +512,53 @@ export default function Content({
 									🏛️ Fiche patrimoine
 								</a>
 							)}
-							{phone && (
+							{phones && phones.map((phone) => (
 								<div>
-									<a href={`tel:${phone}`}>
-										<Emoji e="☎️" /> {phone}
+									<a href={`tel:${phone}`} css={`
+										color:var(--linkColor);
+										text-decoration:none;
+										display:flex;
+										align-items:center;
+										gap:6px;
+										width:fit-content;
+									`}>
+
+									<Image
+										src="/ui/phone.svg"
+										width="20"
+										height="20"
+										alt="Icône Téléphone"
+										css={`
+											filter: invert(52%) sepia(31%) saturate(231%) hue-rotate(187deg) brightness(96%) contrast(85%);
+										`}
+									/>
+
+									{phone}
 									</a>
 								</div>
-							)}
+							))}
 							{website && (
 								<div>
-									<a href={website} target="_blank" title="Site Web">
-										<Emoji e="🌍️" /> <span>Site web</span>
+									<a href={website} target="_blank" title="Site Web" css={`
+										color:var(--linkColor);
+										text-decoration:none;
+										display:flex;
+										align-items:center;
+										gap:6px;
+										width:fit-content;
+									`}>										
+
+										<Image
+											src="/ui/web.svg"
+											width="20"
+											height="20"
+											alt="Icône Web"
+											css={`
+												filter: invert(52%) sepia(31%) saturate(231%) hue-rotate(187deg) brightness(96%) contrast(85%);
+											`}
+										/>
+										
+										<span>Site web</span>
 									</a>
 								</div>
 							)}
@@ -517,7 +569,7 @@ export default function Content({
 									</a>
 								</div>
 							)}
-							{opening_hours && <OpeningHours opening_hours={opening_hours} />}
+							
 							<ContactAndSocial
 								{...{
 									email: email || email2,

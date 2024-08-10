@@ -123,9 +123,9 @@ export default function SetDestination({
 				<button>
 					<div>
 						<Image
-							src="/itinerary.svg"
-							width="50"
-							height="50"
+							src="/ui/go.svg"
+							width="24"
+							height="24"
 							alt="Lancer le mode itinéraire"
 						/>
 					</div>

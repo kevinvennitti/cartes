@@ -23,8 +23,26 @@ export default function ContactAndSocial({
 					href={`mailto:${email}`}
 					target="_blank"
 					title="Contacter via courriel"
+					css={`
+						color:var(--linkColor);
+						text-decoration:none;
+						display:flex;
+						align-items:center;
+						gap:6px;
+						width:fit-content;
+					`}
 				>
-					<Emoji e="📧" />
+					
+					<Image
+						src="/ui/mail.svg"
+						width="20"
+						height="20"
+						alt="Icône Mail"
+						css={`
+							filter: invert(52%) sepia(31%) saturate(231%) hue-rotate(187deg) brightness(96%) contrast(85%);
+						`}
+					/>
+						Contacter via courriel
 				</a>
 			)}
 			{facebook && (
@@ -32,8 +50,16 @@ export default function ContactAndSocial({
 					href={atOrUrl(facebook, 'https://facebook.com')}
 					target="_blank"
 					title="Compte Facebook"
+					css={`
+						color:var(--linkColor);
+						text-decoration:none;
+						display:flex;
+						align-items:center;
+						gap:6px;
+						width:fit-content;
+					`}
 				>
-					<Emoji extra="E042" />
+					<Emoji extra="E042" /> Facebook
 				</a>
 			)}
 			{whatsapp && (
@@ -41,8 +67,16 @@ export default function ContactAndSocial({
 					href={atOrUrl(whatsapp, 'https://wa.me')}
 					target="_blank"
 					title="Discuter sur Whatsapp"
+					css={`
+						color:var(--linkColor);
+						text-decoration:none;
+						display:flex;
+						align-items:center;
+						gap:6px;
+						width:fit-content;
+					`}
 				>
-					<Emoji extra="E248" />
+					<Emoji extra="E248" /> Contacter via Whatsapp
 				</a>
 			)}
 			{instagram && (
@@ -50,8 +84,16 @@ export default function ContactAndSocial({
 					href={atOrUrl(instagram, 'https://instagram.com')}
 					target="_blank"
 					title="Compte Instagram"
+					css={`
+						color:var(--linkColor);
+						text-decoration:none;
+						display:flex;
+						align-items:center;
+						gap:6px;
+						width:fit-content;
+					`}
 				>
-					<Emoji extra="E043" />
+					<Emoji extra="E043" /> Instagram
 				</a>
 			)}
 			{youtube && (
@@ -59,8 +101,16 @@ export default function ContactAndSocial({
 					href={atOrUrl(youtube, 'https://youtube.com')}
 					target="_blank"
 					title="Chaîne Youtube"
+					css={`
+						color:var(--linkColor);
+						text-decoration:none;
+						display:flex;
+						align-items:center;
+						gap:6px;
+						width:fit-content;
+					`}
 				>
-					<Emoji extra="E044" />
+					<Emoji extra="E044" /> Chaîne Youtube
 				</a>
 			)}
 			{linkedin && (
@@ -68,8 +118,16 @@ export default function ContactAndSocial({
 					href={atOrUrl(linkedin, 'https://linkedin.com/company')}
 					target="_blank"
 					title="Compte LinkedIn"
+					css={`
+						color:var(--linkColor);
+						text-decoration:none;
+						display:flex;
+						align-items:center;
+						gap:6px;
+						width:fit-content;
+					`}
 				>
-					<Emoji extra="E046" />
+					<Emoji extra="E046" /> Linkedin
 				</a>
 			)}
 			{siret && (
@@ -77,9 +135,13 @@ export default function ContactAndSocial({
 					href={`https://annuaire-entreprises.data.gouv.fr/etablissement/${siret}`}
 					target="_blank"
 					title="Fiche entreprise sur l'annuaire officiel des entreprises"
-					style={css`
-						display: flex;
-						align-items: center;
+					css={`
+						color:var(--linkColor);
+						text-decoration:none;
+						display:flex;
+						align-items:center;
+						gap:6px;
+						width:fit-content;
 					`}
 				>
 					<Image
@@ -93,7 +155,7 @@ export default function ContactAndSocial({
 						width={14}
 						height={14}
 					/>
-					<span>fiche entreprise</span>
+					<span>Fiche entreprise</span>
 				</a>
 			)}
 		</div>

@@ -27,7 +27,7 @@ export const getTagLabels = (key, value) => {
 }
 
 const translateBasics = (value: string) => {
-	const found = { yes: 'oui', no: 'non' }[value]
+	const found = { yes: 'Oui', no: 'Non' }[value]
 	return found || value
 }
 
@@ -35,6 +35,7 @@ export const tagNameCorrespondance = (key: string) => {
 	const found = {
 		alt_name:'Autre nom',
 		books: 'Livres',
+		artist_name: 'Nom de l\'artiste',
 		'brand:website': 'Site de la marque',
 		'building:architecture': 'Style architectural',
 		'building:levels': "Nombre d'étages",
@@ -85,6 +86,9 @@ export const tagNameCorrespondance = (key: string) => {
 		'note:fr' : 'Information',
 		'roof:shape': 'Forme du toit',
 		'internet_access:operator': 'Fournisseur d\'accès Internet',
+		'source:population': 'Source des données de la population',
+		'year': 'Année',
+		'phone:for_group': 'Numéro de téléphone pour les groupes',
 	}[key]
 	return found || key
 }

@@ -67,6 +67,8 @@ const generateTheme = (themeColor?: string) => {
 		linkColor = '#1754B0',
 
 		color60 = '#1975D2', // WCAG: AAA
+		color80 = '#7AB4D2',
+		color85 = '#A0D3EE',
 		color90 = '#CBE7F6',
 		color95 = '#E4EFF5',
 		color99 = '#F4F8FB',
@@ -109,6 +111,8 @@ const generateTheme = (themeColor?: string) => {
 		linkColor,
 		separatorColor,
 		color60,
+		color80,
+		color85,
 		color90,
 		color95,
 		color99,

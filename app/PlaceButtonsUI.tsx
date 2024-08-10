@@ -5,7 +5,7 @@ import styled from 'styled-components'
 export const PlaceButtonList = styled.ul`
 	padding: 0;
 	list-style-type: none;
-	margin: 1vh auto;
+	margin: .75rem 0;
 	display: flex;
 	align-items: center;
 	gap:6px;
@@ -18,7 +18,7 @@ export const PlaceButton = styled.li`
 	button {
 		width:100%;
 		padding:10px 16px;
-		background:var(--color95);
+		background:var(--color90);
 		border-radius:10px;
 		color:var(--linkColor);
 		font-weight:600;
@@ -30,7 +30,7 @@ export const PlaceButton = styled.li`
 		gap:6px;
 
 		&:hover {
-			background:var(--color90);
+			background:var(--color85);
 		}
 
 		> div:first-child {
@@ -41,6 +41,7 @@ export const PlaceButton = styled.li`
 			svg {
 				width: 100%;
 				height: 100%;
+				filter: invert(18%) sepia(96%) saturate(2431%) hue-rotate(198deg) brightness(93%) contrast(91%);
 			}
 		}
 	}
@@ -48,5 +49,10 @@ export const PlaceButton = styled.li`
 	:first-child button {
 		background:var(--color60);
 		color:white;
+		text-decoration:none;
+
+		> div:first-child img {
+			filter: invert(99%) sepia(100%) saturate(0%) hue-rotate(5deg) brightness(105%) contrast(100%);
+		}
 	}
 `

@@ -49,7 +49,7 @@ export default function BookmarkButton({ geocodedClickedPoint, osmFeature }) {
 			>
 				<div>
 					<Image
-						src={same ? '/star-full-gold.svg' : '/star.svg'}
+						src={same ? '/ui/star-active.svg' : '/ui/star-inactive.svg'}
 						alt="Icône d'ajout de favori"
 						width="50"
 						height="50"

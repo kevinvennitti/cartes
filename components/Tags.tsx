@@ -35,10 +35,6 @@ export default function Tags({ tags }) {
 					css={`
 
 						min-height:28px;
-						display:flex;
-						align-items:center;
-						flex-direction:row;
-						gap:4px;
 						
 						${isSecondary(Object.entries(raw)[0]) &&
 						`
@@ -48,19 +44,26 @@ export default function Tags({ tags }) {
 						`}
 					`}
 				>	
-				
-						<Icons tags={raw}/>
-						
 						<span css={`
-							color:var(--lighterTextColor);
-							`}>
-							{tagNameCorrespondance(k)}
-							{' '}:
+							display:flex;
+							align-items:center;
+							flex-direction:row;
+							gap:4px;
+							margin-right:4px;
+							float:left;
+						`}>
+							<Icons tags={raw}/>
+							
+							<span css={`
+								color:var(--lighterTextColor);
+								`}>
+								{tagNameCorrespondance(k)}
+								{' '}:
+							</span>
 						</span>
 
 						<span css={`
 							font-weight:700;
-							margin-left:4px;
 							`}>{tagValueCorrespondance(v)}
 						</span>
 				</li>
@@ -143,7 +146,7 @@ export function SoloTags({ tags, iconsOnly, compact }) {
 						align-items:center;
 						justify-content:center;
 					`}>
-					<Icons tags={raw} />
+					<Icons tags={raw} isColored={true}/>
 					</span>
 
 					{!iconsOnly && <span css={`

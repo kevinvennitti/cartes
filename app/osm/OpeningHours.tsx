@@ -90,7 +90,7 @@ export const OpeningHours = ({ opening_hours }) => {
 				margin: 0;
 				display: flex;
 				align-items: center;
-				
+
 				summary {
 					list-style-type: none;
 					display: flex;
@@ -100,7 +100,8 @@ export const OpeningHours = ({ opening_hours }) => {
 		>
 			<details open={false}>
 				<summary title="Voir tous les horaires">
-					<OpenIndicator isOpen={isOpen === 'error' ? false : isOpen} />{' '}
+					<OpenIndicator isOpen={isOpen === 'error' ? false : isOpen} /> 
+
 					{isOpen === 'error' && <span>Problème dans les horaires</span>}
 					{nextChange === 'error' ? null : !nextChange ? (
 						<span css={`color:#07643C;`}>Ouvert 24/24 7j/7</span>
@@ -166,7 +167,7 @@ export const OpenIndicator = ({ isOpen }) => (
 	<span
 		css={`
 			display: inline-block;
-			margin: 0 0.4rem 0 0;
+			margin: 0 0.4rem 0 1px;
 			width: 1rem;
 			height: 1rem;
 			border-radius: 2rem;

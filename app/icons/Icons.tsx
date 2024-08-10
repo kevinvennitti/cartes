@@ -1,6 +1,6 @@
 import getIcons from './getIcons'
 
-export default function Icons({ tags }) {
+export default function Icons({ tags, isColored = false }) {
 	const icons = typeof tags === 'string' ? [tags] : getIcons(tags)
 	
 	if (icons.length === 0) return null;
@@ -11,15 +11,17 @@ export default function Icons({ tags }) {
 				display: inline-flex;
 				align-items: center;
 				list-style-type: none;
+				
+
 				li {
 					margin-right: 0.2rem;
+					filter: ${isColored ? 'invert(18%) sepia(96%) saturate(2431%) hue-rotate(198deg) brightness(93%) contrast(91%)' : 'filter: invert(52%) sepia(31%) saturate(231%) hue-rotate(187deg) brightness(96%) contrast(85%)'};
 				}
+
 				li:last-child {
 					margin-right: 0;
 				}
-
-				filter: invert(16%) sepia(24%) saturate(3004%) hue-rotate(180deg)
-					brightness(89%) contrast(98%);
+				
 				img {
 					width: 1.2rem;
 					height: 1.2rem;

@@ -23,7 +23,7 @@ export default function Wikipedia({ name }) {
 		doFetch()
 	}, [ApiUrl])
 
-	const shortenText = text && text.split(' ').slice(0, 50).join(' ')
+	const shortenText = text && text.split(' ').slice(0, 100).join(' ')
 
 	return (
 		<div
@@ -41,7 +41,7 @@ export default function Wikipedia({ name }) {
 					position:relative;
 
 					${
-						shortenText?.length > 100 &&
+						shortenText?.length > 400 &&
 						`
 					&:after {
 						position: absolute;
@@ -64,22 +64,7 @@ export default function Wikipedia({ name }) {
 				
 			`}
 		>
-			<div css={`
-					display:flex;
-					align-items:center;
-					gap:6px;
-					margin-bottom:6px;
-				`}>
-				<Image
-					src={wikipediaLogo}
-					alt="Logo de Wikipedia"
-					width="25"
-					height="25"
-				/>
-				<a href={url} target="_blank">
-					<small>Wikipedia</small>
-				</a>
-			</div>
+			
 			<p>
 
 				{shortenText}
@@ -87,11 +72,31 @@ export default function Wikipedia({ name }) {
 			</p>
 
 			<a href={url} target="_blank" css={`
-					font-weight:600;
+					width:100%;
+					padding:10px 16px;
+					background:var(--color95);
+					border-radius:10px;
 					color:var(--linkColor);
+					font-weight:600;
+					text-align:center;
 					text-decoration:none;
+					display:flex;
+					align-items:center;
+					justify-content:center;
+					gap:6px;
+
+					&:hover {
+					background:var(--color90);
+					}
 				`}>
-				Lire l'article
+				<Image
+					src={wikipediaLogo}
+					alt="Logo de Wikipedia"
+					width="25"
+					height="25"
+				/>
+				
+				Lire l'article Wikipédia
 			</a>
 		</div>
 	)

@@ -19,7 +19,7 @@ export default function OsmLinks({
 					background:var(--color95);
 					border-radius:10px;
 					color:var(--linkColor);
-					font-weight:bold;
+					font-weight:600;
 					text-align:center;
 					text-decoration:none;
 					display:flex;
