@@ -130,68 +130,6 @@ export default function Content({
 		(el) => el && (!Array.isArray(el) || el.length > 0)
 	)
 
-	// TODO: dirty integration from OsmFeature.tsx
-
-	const { leisure } = tags || {};
-
-	const {
-		description,
-		'name:br': nameBrezhoneg,
-		opening_hours,
-		phone: phone1,
-		'contact:phone': phone2,
-		'contact:mobile': phone3,
-		email,
-		'contact:email': email2,
-		website: website1,
-		'website:menu': menu,
-		'contact:website': website2,
-		'contact:instagram': instagram,
-		'contact:facebook': facebook,
-		'contact:whatsapp': whatsapp,
-		'contact:youtube': youtube,
-		'contact:linkedin': linkedin,
-		'ref:FR:SIRET': siret,
-		brand: brand,
-		'brand:wikidata': brandWikidata,
-		'brand:wikipedia': brandWikipedia,
-		'ref:FR:Allocine': allocine,
-		'ref:mhs': mérimée,
-		admin_level: adminLevel,
-		wikipedia,
-		image,
-		...rest
-	} = tags
-
-	
-
-	const frenchAdminLevel = getFrenchAdminLevel(tags, adminLevel)
-
-	// could have multiple phone numbers, format: 
-	// +33 1 23 45 67 88;+33 1 23 45 67 89 (semicolon separated)
-	const phone = phone1 || phone2 || phone3;
-	const website = website1 || website2
-
-	const phones = phone ? phone.split(';') : [];
-
-	const name = getName(tags)
-	const nameKeys = getNameKeys(tags)
-
-	const filteredRest = omit([addressKeys, transportKeys, nameKeys].flat(), rest)
-
-	const [keyValueTags, soloTags] = processTags(filteredRest)
-
-	const filteredSoloTags = frenchAdminLevel
-		? [
-				...soloTags.filter((tag) => {
-					return !['Limite administrative', 'Frontière'].includes(tag[1][0])
-				}),
-				['hexagone-contour.svg', [frenchAdminLevel]],
-		  ]
-		: soloTags
-
-	// end of dirty integration
-
 	const elections = searchParams.style === 'elections'
 
 	const showContent =
@@ -265,9 +203,73 @@ export default function Content({
 			</ExplanationWrapper>
 		)
 
+		console.log('tags', tags);
+	
+			// TODO: dirty integration from OsmFeature.tsx
+
+			const { leisure } = tags || {};
+
+			const description = tags?.description || null
+			const nameBrezhoneg = tags?.['name:br'] || null
+			const opening_hours = tags?.opening_hours || null
+			const phone1 = tags?.phone || null
+			const phone2 = tags?.['contact:phone'] || null
+			const phone3 = tags?.['contact:mobile'] || null
+			const email = tags?.email || null
+			const email2 = tags?.['contact:email'] || null
+			const website1 = tags?.website || null
+			const menu = tags?.['website:menu'] || null
+			const website2 = tags?.['contact:website'] || null
+			const instagram = tags?.['contact:instagram'] || null
+			const facebook = tags?.['contact:facebook'] || null
+			const whatsapp = tags?.['contact:whatsapp'] || null
+			const youtube = tags?.['contact:youtube'] || null
+			const linkedin = tags?.['contact:linkedin'] || null
+			const siret = tags?.['ref:FR:SIRET'] || null
+			const brand = tags?.brand || null
+			const brandWikidata = tags?.['brand:wikidata'] || null
+			const brandWikipedia = tags?.['brand:wikipedia'] || null
+			const allocine = tags?.['ref:FR:Allocine'] || null
+			const mérimée = tags?.['ref:mhs'] || null
+			const adminLevel = tags?.admin_level || null
+			const wikipedia = tags?.wikipedia || null
+			const image = tags?.image || null
+			const rest = tags || {}
+
+			const frenchAdminLevel = getFrenchAdminLevel(tags, adminLevel)
+
+			// could have multiple phone numbers, format: 
+			// +33 1 23 45 67 88;+33 1 23 45 67 89 (semicolon separated)
+			const phone = phone1 || phone2 || phone3;
+			const website = website1 || website2
+
+			const phones = phone ? phone.split(';') : [];
+
+			const name = getName(tags)
+			const nameKeys = getNameKeys(tags)
+
+			const filteredRest = omit([addressKeys, transportKeys, nameKeys].flat(), rest)
+
+			const [keyValueTags, soloTags] = processTags(filteredRest)
+
+			const filteredSoloTags = frenchAdminLevel
+				? [
+						...soloTags.filter((tag) => {
+							return !['Limite administrative', 'Frontière'].includes(tag[1][0])
+						}),
+						['hexagone-contour.svg', [frenchAdminLevel]],
+					]
+				: soloTags
+
+			// end of dirty integration
+
+		
+
+		
 	return (
 		<ContentWrapper>
 			{showSearch && (
+				
 				<section>
 					<PlaceSearch
 						{...{
@@ -305,7 +307,9 @@ export default function Content({
 			{elections && (
 				<ElectionsContent searchParams={searchParams} setSnap={setSnap} />
 			)}
+
 			{searchParams.favoris === 'oui' && <Bookmarks />}
+			
 			{searchParams.transports === 'oui' && !itinerary.isItineraryMode && (
 				<TransportMap
 					{...{
@@ -341,22 +345,64 @@ export default function Content({
 			{styleChooser ? (
 				<StyleChooser {...{ setStyleChooser, style, setSnap }} />
 			) : (
-				showContent && (
+				tags === undefined ? (
+					<ContentSection>
+						{mainImage && (
+							<FeatureImage
+								src={mainImage}
+								css={`
+									width: 100%;
+									height: 12rem;
+									@media (min-height: 800px) {
+										height: 12rem;
+									}
+									object-fit: cover;
+								`}
+							/>
+						)}
+						{wikiFeatureImage && (
+							<FeatureImage
+								src={wikiFeatureImage}
+								css={`
+									width: 100%;
+									height: 12rem;
+									@media (min-height: 800px) {
+										height: 12rem;
+									}
+									object-fit: cover;
+								`}
+							/>
+						)}
+						<ZoneImages
+							zoneImages={
+								searchParams.photos === 'oui' && bboxImages?.length > 0
+									? bboxImages
+									: zoneImages
+							} // bbox includes zone, usually
+							panoramaxImages={panoramaxImages}
+							focusImage={focusImage}
+						/>
+					</ContentSection>
+				) : 
+				(showContent && (
 					<ContentSection>
 						<div css={`
 							background:var(--color99);
 							border-radius:0.6rem;
 							margin:-1rem;
+							margin-bottom:1rem;
 							padding:1rem;
 						`}>
 
-						<header css={`
-							display:flex;
-							align-items:center;	
-							flex-wrap:nowrap;
-							margin-bottom:1rem;
-							gap:16px;
-						`}>
+							<header css={`
+								display:flex;
+								align-items:center;	
+								flex-wrap:nowrap;
+								margin-bottom:1rem;
+								gap:16px;
+							`}>
+
+							{filteredSoloTags && (
 
 							<div css={`
 								flex:1;
@@ -379,6 +425,7 @@ export default function Content({
 							`}>
 								<SoloTags tags={filteredSoloTags} />
 							</div>
+								)}
 
 							<div css={`
 								display:flex;
@@ -411,10 +458,12 @@ export default function Content({
 
 								h1 {
 									margin: 0;
+									margin-right:2rem;
 									font-weight:bold;
 									font-size: 1.625rem;
 									line-height: 100%;
 									letter-spacing:-0.02em;
+									text-wrap:pretty;
 								}
 
 								details {
@@ -483,25 +532,19 @@ export default function Content({
 
 							{opening_hours && <OpeningHours opening_hours={opening_hours} />}
 			
-							{description && <small>{description}</small>}
+							{description && <div css={`
+								color:var(--lighterTextColor);	
+							`}>{description}</div>}
 
 							{adminLevel && !frenchAdminLevel && (
-								<div>
+								<div css={`
+									color:var(--lighterTextColor);	
+								`}>
 									<span>Niveau administratif : {adminLevel}</span>
 								</div>
 							)}
 
 							<Address tags={tags} />
-
-							{tags.uic_ref && (
-								<GareInfo
-									{...{
-										nom: tags.name,
-										uic8: tags.uic_ref + computeSncfUicControlDigit(tags.uic_ref),
-									}}
-								/>
-							)}
-
 
 							{mérimée && (
 								<a
@@ -645,15 +688,17 @@ export default function Content({
 
 
 
+					</div>	
+
 
 						{mainImage && (
 							<FeatureImage
 								src={mainImage}
 								css={`
 									width: 100%;
-									height: 6rem;
+									height: 12rem;
 									@media (min-height: 800px) {
-										height: 9rem;
+										height: 12rem;
 									}
 									object-fit: cover;
 								`}
@@ -664,9 +709,9 @@ export default function Content({
 								src={wikiFeatureImage}
 								css={`
 									width: 100%;
-									height: 6rem;
+									height: 12rem;
 									@media (min-height: 800px) {
-										height: 9rem;
+										height: 12rem;
 									}
 									object-fit: cover;
 								`}
@@ -680,9 +725,7 @@ export default function Content({
 							} // bbox includes zone, usually
 							panoramaxImages={panoramaxImages}
 							focusImage={focusImage}
-						/>
-
-						</div>			
+						/>		
 			
 
 						{osmFeature ? (
@@ -726,7 +769,8 @@ export default function Content({
 						)}
 					</ContentSection>
 				)
-			)}
+			)
+		)}
 		</ContentWrapper>
 	)
 }

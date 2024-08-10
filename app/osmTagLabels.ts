@@ -85,6 +85,8 @@ export const tagNameCorrespondance = (key: string) => {
 		'ref:FR:RATP': 'Code RATP',
 		'ref:FR:STIF': 'Code STIF',
 		'ref:FR:STIF:stop_id': 'ID STIF de l\'arrêt',
+		'ref:SNCF': 'Type de ligne SNCF',
+		'ref:SNCF:RER': 'Ligne RER SNCF',
 		'note:fr' : 'Information',
 		'roof:shape': 'Forme du toit',
 		'internet_access:operator': 'Fournisseur d\'accès Internet',
@@ -93,6 +95,9 @@ export const tagNameCorrespondance = (key: string) => {
 		'year': 'Année',
 		'phone:for_group': 'Numéro de téléphone pour les groupes',
 		'route_ref': 'Ligne(s) de bus à l\'arrêt',
+		'postal_code': 'Code postal',
+		'population:date': 'Date des données de population',
+		'seamark:type': 'Type de balise maritime',
 	}[key]
 	return found || key
 }
@@ -104,9 +109,22 @@ export const tagValueCorrespondance = (key: string, tagName: string) => {
 		metro: 'Métro',
 	}
 
+	const specificTranslations = {
+		'seamark:type': {
+			'harbour': 'Port',
+		},
+		'type:RATP': {
+			'rer': 'RER',
+		}
+	}
+
 	const formats = {
 		'route_ref': (v) => v.split(';').join(', '),
 	}
 	
-	return formats[tagName] ? formats[tagName](key) : (translations[key] ?? key)
+	return formats[tagName] ? formats[tagName](key) : (
+		specificTranslations[tagName] ? (
+			specificTranslations[tagName][key] ?? (translations[key] ?? key)
+		) 
+			: (translations[key] ?? key))
 }

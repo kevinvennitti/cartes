@@ -109,12 +109,27 @@ export default function OsmFeature({ data, transportStopData }) {
 				}
 			`}
 		>
+
+
+			{tags.uic_ref && (
+				<GareInfo
+					{...{
+						nom: tags.name,
+						uic8: tags.uic_ref + computeSncfUicControlDigit(tags.uic_ref),
+					}}
+				/>
+			)}
+
 			{wikipedia && wikipedia.includes(':') && <Wikipedia name={wikipedia} />}
 			
 			<Brand {...{ brand, brandWikidata, brandWikipedia }} />
+			
 			<Tags tags={keyValueTags} />
+			
 			{wikidata && <Wikidata id={wikidata} />}
+			
 			<SimilarNodes node={data} />
+
 			<OsmLinks data={data} />
 		</div>
 	)

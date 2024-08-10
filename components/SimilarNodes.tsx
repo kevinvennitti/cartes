@@ -10,6 +10,7 @@ import useSetSearchParams from './useSetSearchParams'
 import { capitalise0, sortBy } from './utils/utils'
 import { OpenIndicator, OpenIndicatorInListItem, getOh } from '@/app/osm/OpeningHours'
 import { categoryIconUrl } from '@/app/QuickFeatureSearch'
+import Image from 'next/image'
 
 // This is very scientific haha
 const latDifferenceOfRennes = 0.07,
@@ -88,7 +89,7 @@ export default function SimilarNodes({ node }) {
 
 	const title = category.title || capitalise0(category.name)
 	const isOpenByDefault = category['open by default']
-	const imageUrl = categoryIconUrl(category)
+	const iconUrl = categoryIconUrl(category)
 	return (
 		<section
 			css={`
@@ -104,6 +105,7 @@ export default function SimilarNodes({ node }) {
 				}
 			`}
 		>
+
 			{closestFeatures && (
 				<>
 					{' '}
@@ -112,6 +114,7 @@ export default function SimilarNodes({ node }) {
 						nodes={closestFeatures.slice(0, 10)}
 						setSearchParams={setSearchParams}
 						isOpenByDefault={isOpenByDefault}
+						iconUrl={iconUrl}
 					/>
 					<details
 						css={`
@@ -124,6 +127,7 @@ export default function SimilarNodes({ node }) {
 							nodes={closestFeatures.slice(10)}
 							setSearchParams={setSearchParams}
 							isOpenByDefault={isOpenByDefault}
+							iconUrl={iconUrl}
 						/>
 					</details>
 				</>
@@ -132,7 +136,7 @@ export default function SimilarNodes({ node }) {
 	)
 }
 
-const NodeList = ({ nodes, setSearchParams, isOpenByDefault }) => (
+const NodeList = ({ nodes, setSearchParams, isOpenByDefault, iconUrl = null }) => (
 	<ul
 		css={`
 			list-style-type: none;
@@ -184,7 +188,30 @@ const NodeList = ({ nodes, setSearchParams, isOpenByDefault }) => (
 							background:var(--color60);
 							border-radius:8px;
 							flex:none;
+							display:flex;
+							align-items:center;
+							justify-content:center;
+
+							> img {
+							 filter: invert(99%) sepia(100%) saturate(0%) hue-rotate(5deg) brightness(105%) contrast(100%);
+							}
 						`}>
+
+							{iconUrl ? (
+								<Image
+									src={iconUrl}
+									width="24"
+									height="24"
+									alt="Icône {f.tags.name}"
+								/>
+							) : (
+								<Image
+									src="/ui/adress.svg"
+									width="24"
+									height="24"
+									alt="Icône {f.tags.name}"
+								/>
+							)}
 
 						</div>
 

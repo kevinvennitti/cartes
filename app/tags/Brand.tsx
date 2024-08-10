@@ -9,25 +9,45 @@ export default function Brand({ brand, brandWikidata, brandWikipedia }) {
 		url = `https://${lang}.wikipedia.org/wiki/${name}`
 
 	return (
+		<>
 		<div css={`
 			display:flex;
 			align-items: center;
+			margin-top: 1.5rem;
+			padding-top:1.5rem;
+			border-top:solid 1px var(--separatorColor);
 		`}>
-			Marque :&nbsp;
-			<img
-				src={'/wikipedia.svg'}
-				alt="Logo de Wikipedia"
-				width="20"
-				height="20"
-				style={css`
-					vertical-align: middle;
-				`}
-			/>{' '}
-			<a href={url} target="_blank">
-				{brand}
-			</a>
-			{brandWikidata && <Wikidata id={brandWikidata} />}
-		</div>
+			<span css={`
+				color:var(--lighterTextColor);	
+			`}>
+				Marque :&nbsp;
+			</span>
+			<div css={`
+				display:flex;
+				align-items: center;
+				gap:4px;
+			`}>
+				<img
+					src={'/wikipedia.svg'}
+					alt="Logo de Wikipedia"
+					width="20"
+					height="20"
+					style={css`
+						vertical-align: middle;
+					`}/>
+					<a href={url} target="_blank" css={`
+						text-decoration:none;
+					`}>
+						{brand}
+					</a>
+				</div>
+			</div>
+			{brandWikidata && 
+			<div>
+				<Wikidata id={brandWikidata} />
+			</div>
+			}
+		</>
 	)
 }
 

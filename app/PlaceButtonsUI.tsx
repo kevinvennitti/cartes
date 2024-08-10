@@ -5,7 +5,7 @@ import styled from 'styled-components'
 export const PlaceButtonList = styled.ul`
 	padding: 0;
 	list-style-type: none;
-	margin: .75rem 0;
+	margin: .75rem 0 0;
 	display: flex;
 	align-items: center;
 	gap:6px;

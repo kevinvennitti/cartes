@@ -12,6 +12,8 @@ const isSecondary = ([k, v]) =>
 	beginningsOfSecondaryTags.some((begining) => k.startsWith(begining))
 
 export default function Tags({ tags }) {
+	if (!tags || tags.length <= 0) return null
+
 	return (
 		<ul
 			css={`
@@ -71,8 +73,11 @@ export default function Tags({ tags }) {
 		</ul>
 	)
 }
-const isFrenchAdministration = (tags) =>
+const isFrenchAdministration = (tags) => {
+	if (!tags) return false
+
 	tags['ref:FR:SIREN'] || tags['ref:INSEE'] // this is an attempt, edge cases can exist
+}
 
 export const getFrenchAdminLevel = (tags, adminLevel) =>
 	isFrenchAdministration(tags) &&

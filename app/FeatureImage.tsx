@@ -9,7 +9,7 @@ export const FeatureImage = styled.img`
 		2.1px 4.1px 5.2px -1.7px hsl(var(--shadow-color) / 0.36),
 		5px 10px 12.6px -2.5px hsl(var(--shadow-color) / 0.36);
 	box-shadow: var(--shadow-elevation-medium);
-	height: 6rem;
+	height: 12rem;
 	width: auto;
 	border-radius: 0.3rem;
 `

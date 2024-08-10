@@ -86,6 +86,7 @@ export function ZoneImages({ zoneImages, panoramaxImages, focusImage }) {
 			css={`
 				overflow: scroll;
 				white-space: nowrap;
+				margin:8px -1rem 0;
 				&::-webkit-scrollbar {
 					display: none;
 				}
@@ -94,13 +95,24 @@ export function ZoneImages({ zoneImages, panoramaxImages, focusImage }) {
 			{(panoramaxThumb || images?.length > 0) && (
 				<ul
 					css={`
-						margin: 0 0 0.4rem 0;
 						display: flex;
 						list-style-type: none;
+						padding:0 1rem;
+						gap:8px;
+
+
+						&:after {
+							content: '';
+							display: block;
+							position: relative;
+							width: 1rem;
+							height: 1rem;
+							flex: none;
+						}
 
 						li {
 							padding: 0;
-							margin: 0 0.4rem;
+							margin: 0;
 						}
 						img {
 						}
@@ -160,8 +172,8 @@ export function ZoneImages({ zoneImages, panoramaxImages, focusImage }) {
 										<FeatureImage
 											src={url}
 											alt="Image de terrain issue de Wikimedia Commons"
-											width="150"
-											height="150"
+											width="250"
+											height="250"
 										/>
 									</button>
 								</li>

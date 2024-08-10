@@ -84,11 +84,13 @@ export default function Wikipedia({ name }) {
 					align-items:center;
 					justify-content:center;
 					gap:6px;
+					margin-top:1rem;
 
 					&:hover {
 					background:var(--color90);
 					}
 				`}>
+
 				<Image
 					src={wikipediaLogo}
 					alt="Logo de Wikipedia"
