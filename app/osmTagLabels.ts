@@ -98,6 +98,8 @@ export const tagNameCorrespondance = (key: string) => {
 		'postal_code': 'Code postal',
 		'population:date': 'Date des données de population',
 		'seamark:type': 'Type de balise maritime',
+		'opening_hours:url': 'URL des horaires',
+		'motor_vehicle': 'Accès aux véhicules motorisés',
 	}[key]
 	return found || key
 }
@@ -120,6 +122,7 @@ export const tagValueCorrespondance = (key: string, tagName: string) => {
 
 	const formats = {
 		'route_ref': (v) => v.split(';').join(', '),
+		// 'opening_hours:url': (v) => "<a href={v}>{v}</a>", // TODO: replace with link
 	}
 	
 	return formats[tagName] ? formats[tagName](key) : (
