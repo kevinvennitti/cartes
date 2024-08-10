@@ -105,7 +105,7 @@ export function ZoneImages({ zoneImages, panoramaxImages, focusImage }) {
 							content: '';
 							display: block;
 							position: relative;
-							width: 1rem;
+							width: calc(1rem - 8px);
 							height: 1rem;
 							flex: none;
 						}
