@@ -1,4 +1,5 @@
 import parseOpeningHours from 'opening_hours'
+import Image from 'next/image'
 
 const getStartOfToday = (date) => {
 	const startOfToday = date || new Date()
@@ -90,33 +91,56 @@ export const OpeningHours = ({ opening_hours }) => {
 				margin: 0;
 				display: flex;
 				align-items: center;
+				list-style-type: none;
 
 				summary {
-					list-style-type: none;
+					list-style: none;
 					display: flex;
 					align-items: center;
+				}
+				summary::marker {
+					display:none;
+				}
+
+				[open] {
 				}
 			`}
 		>
 			<details open={false}>
 				<summary title="Voir tous les horaires">
-					<OpenIndicator isOpen={isOpen === 'error' ? false : isOpen} /> 
 
 					{isOpen === 'error' && <span>Problème dans les horaires</span>}
+					
 					{nextChange === 'error' ? null : !nextChange ? (
+						<>
+						<OpenIndicator isOpen={true} /> 
 						<span css={`color:#07643C;`}>Ouvert 24/24 7j/7</span>
+						</>
 					) : (
+						<>
+						<OpenIndicator isOpen={isOpen === 'error' ? false : isOpen} /> 
 						<span css={`color:${isOpen ? '#07643C' : '#D6162D'};`}>
 							{isOpen ? 'Ouvert' : 'Fermé'} jusqu'à {formatDate(nextChange)}
 						</span>
+						</>
 					)}
+
+					<Image src="ui/chevron-down.svg" width="16" height="16" css={`
+						margin-left:4px;
+						
+						[open] & {
+							transform:rotateZ(-180deg);
+						}
+					`}/>
 				</summary>
 
 				{intervals != null && !ohPerDay.error ? (
 					<ul
 						css={`
-							padding-left: 2rem;
+							padding-left: 1.5rem;
 							width: 100%;
+							position:relative;
+
 							> li {
 								display: flex;
 								justify-content: space-between;
@@ -131,14 +155,32 @@ export const OpeningHours = ({ opening_hours }) => {
 									margin: 0 0.4rem;
 								}
 							}
+
+							&:after {
+								content:'';
+								display:block;
+								position:absolute;
+								left:8px;
+								top:4px;
+								bottom:4px;
+								width:4px;
+								border-radius:8px;
+								background:rgba(0,0,0,.2);
+							}
 						`}
 					>
 						{Object.entries(ohPerDay).map(
 							([day, ranges]) =>
 								day !== 'error' && (
 									<li key={day} css={!ranges.length && `color: gray`}>
-										<span>{day}</span>
-										<ul>
+										<span css={`
+											text-transform:capitalize;
+											color:var(--lighterTextColor);	
+											font-weight:500;	
+										`}>{day}</span>
+										<ul css={`
+											font-weight:700;	
+										`}>
 											{ranges.length > 0 ? (
 												ranges.map((hour) => <li key={hour}>{hour}</li>)
 											) : (
