@@ -66,7 +66,11 @@ export default function Tags({ tags }) {
 
 						<span css={`
 							font-weight:700;
-							`}>{tagValueCorrespondance(v, k)}
+							overflow: hidden;
+							text-overflow: ellipsis;
+							max-width: 100%;
+							display: inline-block;
+						`}>{tagValueCorrespondance(v, k)}
 						</span>
 				</li>
 			))}
