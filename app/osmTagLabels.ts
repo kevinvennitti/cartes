@@ -102,6 +102,7 @@ export const tagNameCorrespondance = (key: string) => {
 		'opening_hours:url': 'URL des horaires',
 		'motor_vehicle': 'Accès aux véhicules motorisés',
 		'image:panorama': 'Panorama',
+		'artist:wikidata': 'ID de l\'artiste sur Wikidata',
 	}[key]
 	return found || key
 }
