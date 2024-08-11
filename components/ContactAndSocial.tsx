@@ -12,6 +12,9 @@ export default function ContactAndSocial({
 	linkedin,
 	siret,
 }) {
+	
+	if (!email && !facebook && !instagram && !whatsapp && !youtube && !linkedin && !siret) return
+
 	return (
 		<div
 			css={`
