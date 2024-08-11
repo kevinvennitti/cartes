@@ -81,6 +81,9 @@ export function ZoneImages({ zoneImages, panoramaxImages, focusImage }) {
 				url,
 			}
 		})
+
+	// if (!panoramaxThumb && images?.length <= 0) return
+
 	return (
 		<div
 			css={`

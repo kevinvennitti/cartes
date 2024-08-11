@@ -13,8 +13,8 @@ export default function Brand({ brand, brandWikidata, brandWikipedia }) {
 		<div css={`
 			display:flex;
 			align-items: center;
-			margin-top: 1.5rem;
-			padding-top:1.5rem;
+			margin-top: 1rem;
+			padding-top:1rem;
 			border-top:solid 1px var(--separatorColor);
 		`}>
 			<span css={`

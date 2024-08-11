@@ -93,8 +93,8 @@ export default function SimilarNodes({ node }) {
 	return (
 		<section
 			css={`
-				margin-top: 1.5rem;
-				padding-top:1.5rem;
+				margin-top: 1rem;
+				padding-top:1rem;
 				border-top:solid 1px var(--separatorColor);
 				
 				h3 {

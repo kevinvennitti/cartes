@@ -107,6 +107,11 @@ export default function OsmFeature({ data, transportStopData }) {
 					line-height: 0.9rem;
 					display: inline-block;
 				}
+					> :first-child {
+						margin-top: 0;
+						padding-top: 0;
+						border-top: none;
+					}
 			`}
 		>
 

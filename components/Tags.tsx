@@ -17,13 +17,13 @@ export default function Tags({ tags }) {
 	return (
 		<ul
 			css={`
-				margin-top: 1.5rem;
-				padding-top:1.5rem;
+				margin-top: 1rem;
+				padding-top:1rem;
 				border-top:solid 1px var(--separatorColor);
 
 				padding-left: 0;
 				list-style-type: none;
-				line-height: 1.4rem;
+				line-height: 1.3rem;
 				img {
 					opacity: 0.7;
 				}
@@ -36,13 +36,13 @@ export default function Tags({ tags }) {
 					key={k + v}
 					css={`
 
-						min-height:28px;
+						// min-height:26px;
 						
 						${isSecondary(Object.entries(raw)[0]) &&
 						`
 						font-size: 0.8165rem; 
 						order: ${1000 + i};
-						min-height:26px;
+						// min-height:24px;
 						`}
 					`}
 				>	
