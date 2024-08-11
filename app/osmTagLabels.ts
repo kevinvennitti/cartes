@@ -92,6 +92,7 @@ export const tagNameCorrespondance = (key: string) => {
 		'internet_access:operator': 'Fournisseur d\'accès Internet',
 		'source:population': 'Source des données de la population',
 		'source:wheelchair': 'Source de l\'accessibilité PMR',
+		'source:opening_hours': 'Source des horaires',
 		'year': 'Année',
 		'phone:for_group': 'Numéro de téléphone pour les groupes',
 		'route_ref': 'Ligne(s) de bus à l\'arrêt',
@@ -100,6 +101,7 @@ export const tagNameCorrespondance = (key: string) => {
 		'seamark:type': 'Type de balise maritime',
 		'opening_hours:url': 'URL des horaires',
 		'motor_vehicle': 'Accès aux véhicules motorisés',
+		'image:panorama': 'Panorama',
 	}[key]
 	return found || key
 }
