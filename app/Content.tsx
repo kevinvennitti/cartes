@@ -545,6 +545,8 @@ export default function Content({
 							)}
 
 							<Address tags={tags} />
+							
+							<Heritage tags={tags} />
 
 							{mérimée && (
 								<a
@@ -627,7 +629,6 @@ export default function Content({
 							{!isNotTransportStop(tags) && (
 								<Stop tags={tags} data={transportStopData} />
 							)}
-							<Heritage tags={tags} />
 							{allocine && (
 								<a
 									href={`https://www.allocine.fr/seance/salle_gen_csalle=${allocine}.html`}
