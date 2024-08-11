@@ -124,6 +124,7 @@ export const tagValueCorrespondance = (key: string, tagName: string) => {
 
 	const formats = {
 		'route_ref': (v) => v.split(';').join(', '),
+		'Population': (v) => v + ' habitants',
 		// 'opening_hours:url': (v) => "<a href={v}>{v}</a>", // TODO: replace with link
 	}
 	
