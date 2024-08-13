@@ -1,5 +1,4 @@
 import Content from './Content'
-import { modalSheetBoxShadow } from './ModalSheetReminder'
 
 export default function SideSheet(props) {
 	return (

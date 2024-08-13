@@ -30,7 +30,7 @@ export default function ContactAndSocial({
 					href={`mailto:${email}`}
 					target="_blank"
 					title="Contacter via courriel"
-					className="information-item link">
+					className="link">
 					
 					<Image
 						src="/ui/mail.svg"
@@ -47,7 +47,7 @@ export default function ContactAndSocial({
 					href={atOrUrl(facebook, 'https://facebook.com')}
 					target="_blank"
 					title="Compte Facebook"
-					className="information-item link">
+					className="link">
 
 					<Image
 						src="/ui/facebook.svg"
@@ -65,7 +65,7 @@ export default function ContactAndSocial({
 					href={atOrUrl(whatsapp, 'https://wa.me')}
 					target="_blank"
 					title="Discuter sur Whatsapp"
-					className="information-item link">
+					className="link">
 
 					<Image
 						src="/ui/whatsapp.svg"
@@ -83,7 +83,7 @@ export default function ContactAndSocial({
 					href={atOrUrl(instagram, 'https://instagram.com')}
 					target="_blank"
 					title="Compte Instagram"
-					className="information-item link">
+					className="link">
 						
 					<Image
 						src="/ui/instagram.svg"
@@ -101,7 +101,7 @@ export default function ContactAndSocial({
 					href={atOrUrl(youtube, 'https://youtube.com')}
 					target="_blank"
 					title="Chaîne Youtube"
-					className="information-item link">
+					className="link">
 
 					<Image
 						src="/ui/youtube.svg"
@@ -119,7 +119,7 @@ export default function ContactAndSocial({
 					href={atOrUrl(linkedin, 'https://linkedin.com/company')}
 					target="_blank"
 					title="Compte LinkedIn"
-					className="information-item link">
+					className="link">
 
 					<Image
 						src="/ui/linkedin.svg"
@@ -137,7 +137,7 @@ export default function ContactAndSocial({
 					href={`https://annuaire-entreprises.data.gouv.fr/etablissement/${siret}`}
 					target="_blank"
 					title="Fiche entreprise sur l'annuaire officiel des entreprises"
-					className="information-item link">
+					className="link">
 						
 					<Image
 						src={'/ui/france.png'}

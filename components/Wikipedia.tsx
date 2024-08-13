@@ -64,25 +64,14 @@ export default function Wikipedia({ name }) {
 
 			</p>
 
-			<a href={url} target="_blank" css={`
-					width:100%;
-					padding:10px 16px;
-					background:var(--color95);
-					border-radius:10px;
-					color:var(--linkColor);
-					font-weight:600;
-					text-align:center;
-					text-decoration:none;
-					display:flex;
-					align-items:center;
-					justify-content:center;
-					gap:6px;
-					margin-top:1rem;
-
-					&:hover {
-					background:var(--color90);
-					}
-				`}>
+			<a 
+				href={url} 
+				target="_blank" 
+				className="button"
+				css={`
+					margin-top:0.5rem;
+				`}
+			>
 
 				<Image
 					src={wikipediaLogo}
