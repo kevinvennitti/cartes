@@ -20,7 +20,7 @@ body {
 	max-width: 100vw;
 	height: 100%;
 	font-size: 16px;
-	line-height: 1.5rem;
+	line-height: 1.4rem;
 
 	/* contain overscroll behaviour only in vertical direction
 	 * https://stackoverflow.com/questions/36212722/how-to-prevent-pull-down-to-refresh-of-mobile-chrome
@@ -63,7 +63,7 @@ nav {
 a {
 	border: none;
 	font-size: inherit;
-	padding: none;
+	padding: 0;
 	text-decoration: underline;
 	text-underline-offset: 4px;
 	color: var(--darkColor);
@@ -131,16 +131,17 @@ h6 {
 p {
 	margin: 0 0 0.4rem;
 }
-small {
+
+:where(small:not(a > small)) {
 	line-height: 1rem;
 	display: inline-block;
 	color:var(--lighterTextColor);
 	font-size:0.8125rem;
 }
-a small {
+/* a small {
 	color:var(--linkColor);
 	font-weight:600;
-}
+} */
 
 blockquote {
 	border-left: 0.4rem solid var(--color);
