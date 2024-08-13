@@ -1,6 +1,7 @@
 import { ThemeColorsProvider } from '@/components/utils/colors'
 import { Metadata } from 'next'
 import '../globals.css'
+import '../ui.css'
 import StyledComponentsRegistry from '../lib/registry'
 
 const title = `Cartes`
