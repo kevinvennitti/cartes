@@ -60,22 +60,25 @@ const generateTheme = (themeColor?: string) => {
 	const // Use the default theme color if the host page hasn't made a choice
 		color = themeColor || '#2988e6',
 
-		lighterColor = '#7F879E', // WCAG: AAA
-		textColor = '#071E40', // WCAG: AAA
-		lighterTextColor = '#51596C', // WCAG: AAA
-		separatorColor = '#E4EFF5',
-		linkColor = '#1754B0',
-
-		color60 = '#1975D2', // WCAG: AAA
+		color40 = '#113E83', 
+		color50 = '#0C59A6', // WCAG: AAA
+		color60 = '#1975D2', // WCAG: AAA (background)
 		color80 = '#7AB4D2',
 		color85 = '#A0D3EE',
 		color90 = '#CBE7F6',
 		color95 = '#E4EFF5',
 		color99 = '#F4F8FB',
 
+		lighterColor = '#7F879E', // WCAG: AAA
+		lightestColor = '#DCDFE5', // borders
+		textColor = '#071E40', // WCAG: AAA
+		lighterTextColor = '#51596C', // WCAG: AAA
+		separatorColor = '#E4EFF5',
+		linkColor = color50,
+		linkColorHover = color40,
+
 		lightColor = '#57bff5' || lightenColor(color, 10),
 		darkColor = '#185abd' || lightenColor(color, -20),
-		lightestColor = lightenColor(color, 40),
 		lightestColor2 = lightenColor(color, 50),
 		darkestColor = lightenColor(color, -45),
 		darkerColor = lightenColor(color, -35),
@@ -109,7 +112,10 @@ const generateTheme = (themeColor?: string) => {
 		darkerColor2,
 
 		linkColor,
+		linkColorHover,
 		separatorColor,
+		color40,
+		color50,
 		color60,
 		color80,
 		color85,
