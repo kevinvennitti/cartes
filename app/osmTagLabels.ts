@@ -103,6 +103,10 @@ export const tagNameCorrespondance = (key: string) => {
 		'motor_vehicle': 'Accès aux véhicules motorisés',
 		'image:panorama': 'Panorama',
 		'artist:wikidata': 'ID de l\'artiste sur Wikidata',
+		'loc_name': 'Nom local',
+		'loc_name:fr': 'Nom local',
+		'old_name:fr': 'Ancien nom',
+		
 	}[key]
 	return found || key
 }
@@ -129,9 +133,10 @@ export const tagValueCorrespondance = (key: string, tagName: string) => {
 		// 'opening_hours:url': (v) => "<a href={v}>{v}</a>", // TODO: replace with link
 	}
 	
-	return formats[tagName] ? formats[tagName](key) : (
-		specificTranslations[tagName] ? (
-			specificTranslations[tagName][key] ?? (translations[key] ?? key)
-		) 
+	return formats[tagName] 
+		? formats[tagName](key) 
+		: (
+			specificTranslations[tagName] 
+			? (specificTranslations[tagName][key] ?? (translations[key] ?? key)) 
 			: (translations[key] ?? key))
 }
