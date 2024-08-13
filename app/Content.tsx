@@ -386,19 +386,13 @@ export default function Content({
 				) : 
 				(showContent && (
 					<ContentSection>
-						<div css={`
-							background:var(--color99);
-							border-radius:0.6rem;
-							margin:-1rem;
-							margin-bottom:1rem;
-							padding:1rem;
-						`}>
+						<div className="sidesheet-header">
 
 							<header css={`
 								display:flex;
 								align-items:center;	
 								flex-wrap:nowrap;
-								margin-bottom:1rem;
+								margin-bottom:.75rem;
 								gap:16px;
 							`}>
 
@@ -453,18 +447,6 @@ export default function Content({
 						<div
 							css={`
 								position: relative;
-								margin-bottom: 0.5rem;
-								position:relative;
-
-								h1 {
-									margin: 0;
-									margin-right:2rem;
-									font-weight:bold;
-									font-size: 1.625rem;
-									line-height: 100%;
-									letter-spacing:-0.02em;
-									text-wrap:pretty;
-								}
 
 								details {
 									summary {
@@ -479,25 +461,33 @@ export default function Content({
 										width: 1.2rem;
 										height: auto;
 									}
-									ul {
-										margin-left: 1.6rem;
-									}
 								}
 								small {
 									text-align: right;
 								}
-								h2 {
-									font-size: 105%;
-								}
 							`}
 						>
-							<h1>{name}</h1>
+							<h1 
+							className="heading-xl"
+							css={`
+								margin-right:2rem;
+							`}
+							>
+								{name}
+							</h1>
 							
-							<details css={``}>
+							{(getNames(tags) && getNames(tags).length > 0) && (
+							<details>
 								<summary title="Nom du lieu dans d'autres langues">
 									<Image src={languageIcon} alt="Icône polyglotte" />
 								</summary>
-								<h2>Noms dans les autres langues : </h2>
+
+								<div 
+									className="place-languages"
+								>
+								<h2 className="heading-m">
+									Noms dans les autres langues :
+								</h2>
 								<ul>
 									{getNames(tags).map(([key, [value, altNames]]) => (
 										<li key={key}>
@@ -512,29 +502,27 @@ export default function Content({
 										</li>
 									))}
 								</ul>
+								</div>
 							</details>
+							)}
 						</div>
 
-						<div>
+						<div css={`
+							line-height:140%;
+							display:flex;
+							flex-direction:column;
+							gap:4px;
+						`}>
 							{nameBrezhoneg && nameBrezhoneg !== name && (
-								<small css={`
-									color:var(--lighterTextColor);
-									text-decoration:none;
-									display:flex;
-									align-items:center;
-									gap:6px;
-									width:fit-content;
-								`}>
+								<small className="information-item">
 									<Emoji extra="1F3F4-E0066-E0072-E0062-E0072-E0065-E007F" />{' '}
 									{nameBrezhoneg}
 								</small>
 							)}
-
-							{opening_hours && <OpeningHours opening_hours={opening_hours} />}
 			
-							{description && <div css={`
-								color:var(--lighterTextColor);	
-							`}>{description}</div>}
+							{description && (
+								<div class="place-description">{description}</div>
+							)}
 
 							{adminLevel && !frenchAdminLevel && (
 								<div css={`
@@ -544,128 +532,136 @@ export default function Content({
 								</div>
 							)}
 
-							<Address tags={tags} />
-							
-							<Heritage tags={tags} />
 
-							{mérimée && (
-								<a
-									href={`https://www.pop.culture.gouv.fr/notice/merimee/${mérimée}`}
-									target="_blank"
-									title="Lien vers la fiche sur la plateforme ouverte du patrimoine"
-								>
-									🏛️ Fiche patrimoine
-								</a>
-							)}
-							{phones && phones.map((phone) => (
-								<div>
-									<a href={`tel:${phone}`} css={`
-										color:var(--linkColor);
-										text-decoration:none;
-										display:flex;
-										align-items:center;
-										gap:6px;
-										width:fit-content;
-									`}>
+
+
+							{opening_hours && 
+							<OpeningHours 
+								opening_hours={opening_hours} 
+							/>}
+
+
+							<div css={`
+							line-height:140%;
+							display:flex;
+							flex-direction:column;
+							gap:4px;
+						`}>
+								<Address tags={tags} />
+
+								<Heritage tags={tags} />
+
+								{mérimée && (
+									<a
+										href={`https://www.pop.culture.gouv.fr/notice/merimee/${mérimée}`}
+										target="_blank"
+										title="Lien vers la fiche sur la plateforme ouverte du patrimoine" className="information-item link"
+									>
 
 									<Image
-										src="/ui/phone.svg"
+										src="/ui/patrimoine.svg"
 										width="20"
 										height="20"
-										alt="Icône Téléphone"
-										css={`
-											filter: invert(52%) sepia(31%) saturate(231%) hue-rotate(187deg) brightness(96%) contrast(85%);
-										`}
+										alt="Icône Patrimoine"
+										className="icon-light"
 									/>
 
-									{phone}
+										Fiche patrimoine
 									</a>
-								</div>
-							))}
-							{website && (
-								<div>
-									<a href={website} target="_blank" title="Site Web" css={`
-										color:var(--linkColor);
-										text-decoration:none;
-										display:flex;
-										align-items:center;
-										gap:6px;
-										width:fit-content;
-									`}>										
+								)}
+								{phones && phones.map((phone) => (
+									<div>
+										<a href={`tel:${phone}`} className="information-item link">
 
 										<Image
-											src="/ui/web.svg"
+											src="/ui/phone.svg"
 											width="20"
 											height="20"
-											alt="Icône Web"
-											css={`
-												filter: invert(52%) sepia(31%) saturate(231%) hue-rotate(187deg) brightness(96%) contrast(85%);
-											`}
+											alt="Icône Téléphone"
+											className="icon-light"
 										/>
-										
-										<span>Site web</span>
+
+										{phone}
+										</a>
+									</div>
+								))}
+								{website && (
+									<div>
+										<a href={website} target="_blank" title="Site Web" className="information-item link">										
+
+											<Image
+												src="/ui/web.svg"
+												width="20"
+												height="20"
+												alt="Icône Web"
+												className="icon-light"
+											/>
+											
+											<span>Site web</span>
+										</a>
+									</div>
+								)}
+								{menu && (
+									<div>
+										<a href={menu} target="_blank" title="Menu" className="information-item link">
+											<Emoji e="📋" /> <span>Menu</span>
+										</a>
+									</div>
+								)}
+								
+								<ContactAndSocial
+									{...{
+										email: email || email2,
+										instagram,
+										facebook,
+										whatsapp,
+										youtube,
+										linkedin,
+										siret,
+									}}
+								/>
+								{!isNotTransportStop(tags) && (
+									<Stop tags={tags} data={transportStopData} />
+								)}
+								{allocine && (
+									<a
+										href={`https://www.allocine.fr/seance/salle_gen_csalle=${allocine}.html`}
+										target="_blank"
+										title="Lien vers la fiche cinéma sur Allocine"
+									>
+										Fiche Allociné
 									</a>
-								</div>
-							)}
-							{menu && (
-								<div>
-									<a href={menu} target="_blank" title="Menu">
-										<Emoji e="📋" /> <span>Menu</span>
+								)}
+								{leisure && leisure == 'playground' && (
+									<a
+										href={`https://playguide.eu/app/osm/${featureType}/${id}`}
+										target="_blank"
+										title="Lien vers la fiche de l'aire sur PlayGuide"
+										css={`
+											display: flex;
+											align-items: center;
+											img {
+												margin-right: 0.6rem;
+												width: 1.2rem;
+												height: auto;
+											}
+										`}
+									>
+										<Image
+											src="https://playguide.eu/assets/logo-pentagon.svg"
+											alt="Logo du site PlayGuide"
+											width="10"
+											height="10"
+										/>
+										Fiche PlayGuide
 									</a>
-								</div>
-							)}
-							
-							<ContactAndSocial
-								{...{
-									email: email || email2,
-									instagram,
-									facebook,
-									whatsapp,
-									youtube,
-									linkedin,
-									siret,
-								}}
-							/>
-							{!isNotTransportStop(tags) && (
-								<Stop tags={tags} data={transportStopData} />
-							)}
-							{allocine && (
-								<a
-									href={`https://www.allocine.fr/seance/salle_gen_csalle=${allocine}.html`}
-									target="_blank"
-									title="Lien vers la fiche cinéma sur Allocine"
-								>
-									Fiche Allociné
-								</a>
-							)}
-							{leisure && leisure == 'playground' && (
-								<a
-									href={`https://playguide.eu/app/osm/${featureType}/${id}`}
-									target="_blank"
-									title="Lien vers la fiche de l'aire sur PlayGuide"
-									css={`
-										display: flex;
-										align-items: center;
-										img {
-											margin-right: 0.6rem;
-											width: 1.2rem;
-											height: auto;
-										}
-									`}
-								>
-									<Image
-										src="https://playguide.eu/assets/logo-pentagon.svg"
-										alt="Logo du site PlayGuide"
-										width="10"
-										height="10"
-									/>
-									Fiche PlayGuide
-								</a>
-							)}
+								)}
+							</div>
 						</div>
 
 
-						{(hasDestination || bookmarkable) && (
+						{(hasDestination 
+						|| bookmarkable) && (
 							<PlaceButtonList>
 								{hasDestination && (
 									<SetDestination
@@ -687,46 +683,56 @@ export default function Content({
 							</PlaceButtonList>
 						)}
 
+					</div>
 
+					{(panoramaxImages 
+					|| bboxImages.length > 0 
+					|| zoneImages 
+					|| mainImage 
+					|| wikiFeatureImage) && (
 
-					</div>	
+						<div className="sidesheet-images">
 
-
-						{mainImage && (
-							<FeatureImage
-								src={mainImage}
-								css={`
-									width: 100%;
-									height: 12rem;
-									@media (min-height: 800px) {
+							{mainImage && (
+								<FeatureImage
+									src={mainImage}
+									css={`
+										width: 100%;
 										height: 12rem;
-									}
-									object-fit: cover;
-								`}
-							/>
-						)}
-						{wikiFeatureImage && (
-							<FeatureImage
-								src={wikiFeatureImage}
-								css={`
-									width: 100%;
-									height: 12rem;
-									@media (min-height: 800px) {
+										@media (min-height: 800px) {
+											height: 12rem;
+										}
+										object-fit: cover;
+									`}
+								/>
+							)}
+
+							{wikiFeatureImage && (
+								<FeatureImage
+									src={wikiFeatureImage}
+									css={`
+										width: 100%;
 										height: 12rem;
-									}
-									object-fit: cover;
-								`}
+										@media (min-height: 800px) {
+											height: 12rem;
+										}
+										object-fit: cover;
+									`}
+								/>
+							)}
+
+							<ZoneImages
+								zoneImages={
+									searchParams.photos === 'oui' && bboxImages?.length > 0
+										? bboxImages
+										: zoneImages
+								} // bbox includes zone, usually
+								panoramaxImages={panoramaxImages}
+								focusImage={focusImage}
 							/>
-						)}
-						<ZoneImages
-							zoneImages={
-								searchParams.photos === 'oui' && bboxImages?.length > 0
-									? bboxImages
-									: zoneImages
-							} // bbox includes zone, usually
-							panoramaxImages={panoramaxImages}
-							focusImage={focusImage}
-						/>		
+
+						</div>
+					)}
 			
 
 						{osmFeature ? (
