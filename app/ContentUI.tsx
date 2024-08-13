@@ -23,8 +23,5 @@ export const ContentSection = styled.section`
 `
 
 export const ContentWrapper = styled.section`
-	h2 {
-		font-size: 120%;
-		margin: 1rem 0 0.4rem;
-	}
+
 `
