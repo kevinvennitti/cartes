@@ -1,7 +1,7 @@
 import { getThumb } from '@/components/wikidata'
 import { useEffect, useState } from 'react'
 import { createSearchBBox } from './createSearchPolygon'
-import { FeatureImage } from './FeatureImage'
+import FeatureImage from './FeatureImage'
 import Image from 'next/image'
 import {
 	getWikimediaGeosearchUrl,
@@ -86,40 +86,11 @@ export function ZoneImages({ zoneImages, panoramaxImages, focusImage }) {
 
 	return (
 		<div
-			css={`
-				overflow: scroll;
-				white-space: nowrap;
-				margin:8px -1rem 0;
-				&::-webkit-scrollbar {
-					display: none;
-				}
-			`}
+			className="feature-image-carousel"
 		>
 			{(panoramaxThumb || images?.length > 0) && (
 				<ul
-					css={`
-						display: flex;
-						list-style-type: none;
-						padding:0 1rem;
-						gap:8px;
-
-
-						&:after {
-							content: '';
-							display: block;
-							position: relative;
-							width: calc(1rem - 8px);
-							height: 1rem;
-							flex: none;
-						}
-
-						li {
-							padding: 0;
-							margin: 0;
-						}
-						img {
-						}
-					`}
+					className="feature-image-carousel-items"
 				>
 					{panoramaxThumb && (
 						<a
@@ -127,6 +98,7 @@ export function ZoneImages({ zoneImages, panoramaxImages, focusImage }) {
 								1
 							)}&pic=${panoramaxImage.id}`}
 							target="_blank"
+							className="feature-image-carousel-item"
 						>
 							<div
 								css={`
@@ -164,7 +136,10 @@ export function ZoneImages({ zoneImages, panoramaxImages, focusImage }) {
 						images.map((image) => {
 							const { url } = image
 							return (
-								<li key={url}>
+								<li 
+									key={url}
+									className="feature-image-carousel-item"
+								>
 									<button
 										onClick={() => focusImage(image)}
 										css={`

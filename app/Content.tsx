@@ -7,7 +7,6 @@ import Bookmarks from './Bookmarks'
 import ClickedPoint from './ClickedPoint'
 import { ContentSection, ContentWrapper, ExplanationWrapper } from './ContentUI'
 import ElectionsContent from './Elections'
-import { FeatureImage } from './FeatureImage'
 import OsmFeature from './OsmFeature'
 import { PlaceButtonList } from './PlaceButtonsUI'
 import PlaceSearch from './PlaceSearch'
@@ -16,7 +15,6 @@ import QuickFeatureSearch from './QuickFeatureSearch'
 import SetDestination from './SetDestination'
 import ShareButton from './ShareButton'
 import { DialogButton, ModalCloseButton } from './UI'
-import { ZoneImages } from './ZoneImages'
 import Explanations from './explanations.mdx'
 import Itinerary from './itinerary/Itinerary'
 import getUrl from './osm/getUrl'
@@ -31,6 +29,7 @@ import useWikidata from './useWikidata'
 import languageIcon from '@/public/language.svg'
 import Image from 'next/image'
 import Address, { addressKeys } from '@/components/Address'
+import PlaceImages from './PlaceImages'
 import Stop, { isNotTransportStop, transportKeys } from './transport/stop/Stop'
 import Tags, {
 	SoloTags,
@@ -347,39 +346,13 @@ export default function Content({
 			) : (
 				tags === undefined ? (
 					<ContentSection>
-						{mainImage && (
-							<FeatureImage
-								src={mainImage}
-								css={`
-									width: 100%;
-									height: 12rem;
-									@media (min-height: 800px) {
-										height: 12rem;
-									}
-									object-fit: cover;
-								`}
-							/>
-						)}
-						{wikiFeatureImage && (
-							<FeatureImage
-								src={wikiFeatureImage}
-								css={`
-									width: 100%;
-									height: 12rem;
-									@media (min-height: 800px) {
-										height: 12rem;
-									}
-									object-fit: cover;
-								`}
-							/>
-						)}
-						<ZoneImages
-							zoneImages={
-								searchParams.photos === 'oui' && bboxImages?.length > 0
-									? bboxImages
-									: zoneImages
-							} // bbox includes zone, usually
+						<PlaceImages
 							panoramaxImages={panoramaxImages}
+							bboxImages={bboxImages}
+							zoneImages={zoneImages}
+							mainImage={mainImage}
+							wikiFeatureImage={wikiFeatureImage} 
+							searchParams={searchParams}
 							focusImage={focusImage}
 						/>
 					</ContentSection>
@@ -514,14 +487,18 @@ export default function Content({
 							gap:4px;
 						`}>
 							{nameBrezhoneg && nameBrezhoneg !== name && (
-								<small className="information-item">
+								<small className="place-description-tag">
 									<Emoji extra="1F3F4-E0066-E0072-E0062-E0072-E0065-E007F" />{' '}
 									{nameBrezhoneg}
 								</small>
 							)}
 			
 							{description && (
-								<div class="place-description">{description}</div>
+								<div 
+									className="place-description"
+								>
+									{description}
+								</div>
 							)}
 
 							{adminLevel && !frenchAdminLevel && (
@@ -555,7 +532,7 @@ export default function Content({
 									<a
 										href={`https://www.pop.culture.gouv.fr/notice/merimee/${mérimée}`}
 										target="_blank"
-										title="Lien vers la fiche sur la plateforme ouverte du patrimoine" className="information-item link"
+										title="Lien vers la fiche sur la plateforme ouverte du patrimoine" className="link"
 									>
 
 									<Image
@@ -571,7 +548,7 @@ export default function Content({
 								)}
 								{phones && phones.map((phone) => (
 									<div>
-										<a href={`tel:${phone}`} className="information-item link">
+										<a href={`tel:${phone}`} className="link">
 
 										<Image
 											src="/ui/phone.svg"
@@ -587,7 +564,7 @@ export default function Content({
 								))}
 								{website && (
 									<div>
-										<a href={website} target="_blank" title="Site Web" className="information-item link">										
+										<a href={website} target="_blank" title="Site Web" className="link">										
 
 											<Image
 												src="/ui/web.svg"
@@ -603,7 +580,7 @@ export default function Content({
 								)}
 								{menu && (
 									<div>
-										<a href={menu} target="_blank" title="Menu" className="information-item link">
+										<a href={menu} target="_blank" title="Menu" className="link">
 											<Emoji e="📋" /> <span>Menu</span>
 										</a>
 									</div>
@@ -685,54 +662,15 @@ export default function Content({
 
 					</div>
 
-					{(panoramaxImages 
-					|| bboxImages.length > 0 
-					|| zoneImages 
-					|| mainImage 
-					|| wikiFeatureImage) && (
-
-						<div className="sidesheet-images">
-
-							{mainImage && (
-								<FeatureImage
-									src={mainImage}
-									css={`
-										width: 100%;
-										height: 12rem;
-										@media (min-height: 800px) {
-											height: 12rem;
-										}
-										object-fit: cover;
-									`}
-								/>
-							)}
-
-							{wikiFeatureImage && (
-								<FeatureImage
-									src={wikiFeatureImage}
-									css={`
-										width: 100%;
-										height: 12rem;
-										@media (min-height: 800px) {
-											height: 12rem;
-										}
-										object-fit: cover;
-									`}
-								/>
-							)}
-
-							<ZoneImages
-								zoneImages={
-									searchParams.photos === 'oui' && bboxImages?.length > 0
-										? bboxImages
-										: zoneImages
-								} // bbox includes zone, usually
-								panoramaxImages={panoramaxImages}
-								focusImage={focusImage}
-							/>
-
-						</div>
-					)}
+					<PlaceImages
+						panoramaxImages={panoramaxImages}
+						bboxImages={bboxImages}
+						zoneImages={zoneImages}
+						mainImage={mainImage}
+						wikiFeatureImage={wikiFeatureImage} 
+						searchParams={searchParams}
+						focusImage={focusImage}
+					/>
 			
 
 						{osmFeature ? (
