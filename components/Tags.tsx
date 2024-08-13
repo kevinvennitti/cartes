@@ -17,10 +17,6 @@ export default function Tags({ tags }) {
 	return (
 		<ul
 			css={`
-				margin-top: 1rem;
-				padding-top:1rem;
-				border-top:solid 1px var(--separatorColor);
-
 				padding-left: 0;
 				list-style-type: none;
 				line-height: 1.3rem;
@@ -30,6 +26,7 @@ export default function Tags({ tags }) {
 				display: flex;
 				flex-direction: column;
 			`}
+			className="sidesheet-section"
 		>
 			{tags.map(([raw, [k, v]], i) => (
 				<li

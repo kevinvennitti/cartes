@@ -26,9 +26,13 @@ export default function Address({ tags, noPrefix }) {
 				color:var(--lighterTextColor);
 				font-style:normal;
 				display:flex;
-				align-items:center;
+				align-items:flex-start;
 				gap:6px;
 				width:fit-content;
+
+				> img {
+				 	margin-top:1px;
+				}
 			`}
 		>
 			<Image
@@ -36,9 +40,7 @@ export default function Address({ tags, noPrefix }) {
 				width="20"
 				height="20"
 				alt="Icône Adresse"
-				css={`
-					filter: invert(52%) sepia(31%) saturate(231%) hue-rotate(187deg) brightness(96%) contrast(85%);
-				`}
+				className="icon-light"
 			/>
 
 			{address}

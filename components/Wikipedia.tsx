@@ -27,16 +27,9 @@ export default function Wikipedia({ name }) {
 
 	return (
 		<div
+			className="sidesheet-section"
 			css={`
-				margin-top: 1rem;
-				padding-top:1rem;
-				border-top:solid 1px var(--separatorColor);
-				
-				position: relative;
-				
-				}
 				p {
-					line-height: 1.3rem;
 					margin-bottom:0;
 					position:relative;
 

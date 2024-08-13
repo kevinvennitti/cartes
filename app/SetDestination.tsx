@@ -119,24 +119,21 @@ export default function SetDestination({
 
 	return (
 		<PlaceButton>
-			<Link href={href}>
-				<button>
-					<div>
-						<Image
-							src="/ui/go.svg"
-							width="24"
-							height="24"
-							alt="Lancer le mode itinéraire"
-						/>
-					</div>
-					{distance ? (
-						<div>
-							À {humanDistance[0]} {humanDistance[1]}
-						</div>
-					) : (
-						<div>Y aller</div>
-					)}
-				</button>
+			<Link href={href} className="sidesheet-main-action-button primary">
+				<Image
+					src="/ui/go.svg"
+					width="24"
+					height="24"
+					alt="Lancer le mode itinéraire"
+				/>
+				
+				{distance ? (
+					<span>
+						À {humanDistance[0]} {humanDistance[1]}
+					</span>
+				) : (
+					<span>Y aller</span>
+				)}
 			</Link>
 		</PlaceButton>
 	)

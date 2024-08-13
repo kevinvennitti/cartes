@@ -126,7 +126,6 @@ const SheetContentWrapper = styled.div`
 	height: 100%;
 	display: flex;
 	flex-direction: column;
-	padding: 0rem 0.6rem;
 `
 const CustomSheet = styled(Sheet)`
 	.react-modal-sheet-backdrop {

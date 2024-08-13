@@ -99,19 +99,12 @@ export default function OsmFeature({ data, transportStopData }) {
 
 	return (
 		<div
+			className="sidesheet-sections"
 			css={`
-				a {
-					color: var(--darkColor);
-				}
 				> small {
 					line-height: 0.9rem;
 					display: inline-block;
 				}
-					> :first-child {
-						margin-top: 0;
-						padding-top: 0;
-						border-top: none;
-					}
 			`}
 		>
 
@@ -131,7 +124,7 @@ export default function OsmFeature({ data, transportStopData }) {
 			
 			<Tags tags={keyValueTags} />
 			
-			{wikidata && <Wikidata id={wikidata} />}
+				{wikidata && <Wikidata id={wikidata} />}
 			
 			<SimilarNodes node={data} />
 

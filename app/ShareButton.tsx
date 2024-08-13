@@ -43,10 +43,9 @@ export default function ShareButton({ osmFeature, geocodedClickedPoint }) {
 	return (
 		<PlaceButton>
 			{navigatorShare ? (
-				<button
-					css={`
-						margin: 0 auto !important;
-					`}
+				<div
+					role="button"
+					className="sidesheet-main-action-button"
 					title="Cliquez pour partager le lien"
 					onClick={() => {
 						navigator
@@ -59,12 +58,12 @@ export default function ShareButton({ osmFeature, geocodedClickedPoint }) {
 							.catch((error) => console.log('Error sharing', error))
 					}}
 				>
-					<div>
-						<Image src={shareIcon} alt="Icône de partage" />
-					</div>
-					<div>Partager</div>
-					{/* Created by Barracuda from the Noun Project */}
-				</button>
+					<Image 
+						src="/ui/share.svg" 
+						alt="Icône de partage" 
+					/>
+					<span>Partager</span>
+				</div>
 			) : (
 				<DesktopShareButton {...{ url }} />
 			)}
@@ -79,7 +78,11 @@ export const DesktopShareButton = ({ url }) => {
 		navigator.clipboard.writeText(url).then(
 			function () {
 				setCopySuccess(true)
-				console.log('Async: Copying to clipboard was successful !')
+				console.log('Async: Copying to clipboard was successful!')
+				
+				setTimeout(() => {
+					setCopySuccess(false)
+				},2500)
 			},
 			function (err) {
 				console.error('Async: Could not copy text: ', err)
@@ -90,27 +93,27 @@ export const DesktopShareButton = ({ url }) => {
 	}
 
 	return (
-		<button onClick={copyToClipboard}>
-			<div>
-				<Image src={shareIcon} alt="Icône de partage" />
-			</div>
-			<div>
-				{!copySuccess ? (
-					'Partager'
-				) : (
-					<span
-						css={`
-							background: white;
-							color: var(--color);
-							padding: 0 0.4rem;
-							line-height: 1.2rem;
-							border-radius: 0.2rem;
-						`}
-					>
-						Copié !
-					</span>
-				)}
-			</div>
-		</button>
+		<div
+			role="button"
+			className="sidesheet-main-action-button"
+			onClick={copyToClipboard}
+		>
+			<Image 
+				src={shareIcon} 
+				alt="Icône de partage" 
+			/>
+			
+			{!copySuccess ? (
+				'Partager'
+			) : (
+				<span
+					css={`
+						color: var(--linkColor);
+					`}
+				>
+					Copié !
+				</span>
+			)}
+		</div>
 	)
 }

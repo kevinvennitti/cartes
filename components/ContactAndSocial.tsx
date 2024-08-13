@@ -19,6 +19,10 @@ export default function ContactAndSocial({
 		<div
 			css={`
 				margin-bottom: 0.6rem;
+				line-height:140%;
+				display:flex;
+				flex-direction:column;
+				gap:4px;
 			`}
 		>
 			{email && (
@@ -26,24 +30,14 @@ export default function ContactAndSocial({
 					href={`mailto:${email}`}
 					target="_blank"
 					title="Contacter via courriel"
-					css={`
-						color:var(--linkColor);
-						text-decoration:none;
-						display:flex;
-						align-items:center;
-						gap:6px;
-						width:fit-content;
-					`}
-				>
+					className="information-item link">
 					
 					<Image
 						src="/ui/mail.svg"
 						width="20"
 						height="20"
 						alt="Icône Mail"
-						css={`
-							filter: invert(52%) sepia(31%) saturate(231%) hue-rotate(187deg) brightness(96%) contrast(85%);
-						`}
+						className="icon-light"
 					/>
 						Contacter via courriel
 				</a>
@@ -53,16 +47,17 @@ export default function ContactAndSocial({
 					href={atOrUrl(facebook, 'https://facebook.com')}
 					target="_blank"
 					title="Compte Facebook"
-					css={`
-						color:var(--linkColor);
-						text-decoration:none;
-						display:flex;
-						align-items:center;
-						gap:6px;
-						width:fit-content;
-					`}
-				>
-					<Emoji extra="E042" /> Facebook
+					className="information-item link">
+
+					<Image
+						src="/ui/facebook.svg"
+						width="20"
+						height="20"
+						alt="Icône Facebook"
+						className="icon-light"
+					/>
+							
+					Facebook
 				</a>
 			)}
 			{whatsapp && (
@@ -70,16 +65,17 @@ export default function ContactAndSocial({
 					href={atOrUrl(whatsapp, 'https://wa.me')}
 					target="_blank"
 					title="Discuter sur Whatsapp"
-					css={`
-						color:var(--linkColor);
-						text-decoration:none;
-						display:flex;
-						align-items:center;
-						gap:6px;
-						width:fit-content;
-					`}
-				>
-					<Emoji extra="E248" /> Contacter via Whatsapp
+					className="information-item link">
+
+					<Image
+						src="/ui/whatsapp.svg"
+						width="20"
+						height="20"
+						alt="Icône Whatsapp"
+						className="icon-light"
+					/>
+						
+					Contacter via Whatsapp
 				</a>
 			)}
 			{instagram && (
@@ -87,16 +83,17 @@ export default function ContactAndSocial({
 					href={atOrUrl(instagram, 'https://instagram.com')}
 					target="_blank"
 					title="Compte Instagram"
-					css={`
-						color:var(--linkColor);
-						text-decoration:none;
-						display:flex;
-						align-items:center;
-						gap:6px;
-						width:fit-content;
-					`}
-				>
-					<Emoji extra="E043" /> Instagram
+					className="information-item link">
+						
+					<Image
+						src="/ui/instagram.svg"
+						width="20"
+						height="20"
+						alt="Icône Instagram"
+						className="icon-light"
+					/>
+					
+					Instagram
 				</a>
 			)}
 			{youtube && (
@@ -104,16 +101,17 @@ export default function ContactAndSocial({
 					href={atOrUrl(youtube, 'https://youtube.com')}
 					target="_blank"
 					title="Chaîne Youtube"
-					css={`
-						color:var(--linkColor);
-						text-decoration:none;
-						display:flex;
-						align-items:center;
-						gap:6px;
-						width:fit-content;
-					`}
-				>
-					<Emoji extra="E044" /> Chaîne Youtube
+					className="information-item link">
+
+					<Image
+						src="/ui/youtube.svg"
+						width="20"
+						height="20"
+						alt="Icône Youtube"
+						className="icon-light"
+					/>
+						
+					Chaîne Youtube
 				</a>
 			)}
 			{linkedin && (
@@ -121,16 +119,17 @@ export default function ContactAndSocial({
 					href={atOrUrl(linkedin, 'https://linkedin.com/company')}
 					target="_blank"
 					title="Compte LinkedIn"
-					css={`
-						color:var(--linkColor);
-						text-decoration:none;
-						display:flex;
-						align-items:center;
-						gap:6px;
-						width:fit-content;
-					`}
-				>
-					<Emoji extra="E046" /> Linkedin
+					className="information-item link">
+
+					<Image
+						src="/ui/linkedin.svg"
+						width="20"
+						height="20"
+						alt="Icône LinkedIn"
+						className="icon-light"
+					/>
+					
+					Linkedin
 				</a>
 			)}
 			{siret && (
@@ -138,25 +137,13 @@ export default function ContactAndSocial({
 					href={`https://annuaire-entreprises.data.gouv.fr/etablissement/${siret}`}
 					target="_blank"
 					title="Fiche entreprise sur l'annuaire officiel des entreprises"
-					css={`
-						color:var(--linkColor);
-						text-decoration:none;
-						display:flex;
-						align-items:center;
-						gap:6px;
-						width:fit-content;
-					`}
-				>
+					className="information-item link">
+						
 					<Image
-						src={'/annuaire-entreprises.svg'}
+						src={'/ui/france.png'}
 						alt="logo Marianne représentant l'annuaire des entreprises"
-						style={css`
-							margin: 0 0.3rem 0 0.2rem;
-							width: 1.4rem;
-							height: auto;
-						`}
-						width={14}
-						height={14}
+						width="20"
+						height="20"
 					/>
 					<span>Fiche entreprise</span>
 				</a>

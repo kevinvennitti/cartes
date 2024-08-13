@@ -136,38 +136,7 @@ export const OpeningHours = ({ opening_hours }) => {
 
 				{intervals != null && !ohPerDay.error ? (
 					<ul
-						css={`
-							padding-left: 1.5rem;
-							width: 100%;
-							position:relative;
-
-							> li {
-								display: flex;
-								justify-content: space-between;
-								> span {
-									margin-right: 2rem;
-								}
-							}
-							> li > ul {
-								display: flex;
-								list-style-type: none;
-								li {
-									margin: 0 0.4rem;
-								}
-							}
-
-							&:after {
-								content:'';
-								display:block;
-								position:absolute;
-								left:8px;
-								top:4px;
-								bottom:4px;
-								width:4px;
-								border-radius:8px;
-								background:rgba(0,0,0,.2);
-							}
-						`}
+						className="place-opening-hours"
 					>
 						{Object.entries(ohPerDay).map(
 							([day, ranges]) =>
@@ -198,7 +167,11 @@ export const OpeningHours = ({ opening_hours }) => {
 						)}
 					</ul>
 				) : (
-					opening_hours
+					<div 
+						className="place-opening-hours"
+					>
+					{opening_hours}
+					</div>
 				)}
 			</details>
 		</div>

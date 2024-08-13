@@ -82,7 +82,7 @@ export function ZoneImages({ zoneImages, panoramaxImages, focusImage }) {
 			}
 		})
 
-	// if (!panoramaxThumb && images?.length <= 0) return
+	if (!panoramaxImage && !images) return
 
 	return (
 		<div

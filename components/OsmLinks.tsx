@@ -8,35 +8,14 @@ export default function OsmLinks({
 		<div
 			css={`
 				margin-top:1rem;
-				display: flex;
-				flex-direction: column;
-				align-items: center;
-				gap:8px;
-				
-				a {
-					width:100%;
-					padding:10px 16px;
-					background:var(--color95);
-					border-radius:10px;
-					color:var(--linkColor);
-					font-weight:600;
-					text-align:center;
-					text-decoration:none;
-					display:flex;
-					align-items:center;
-					justify-content:center;
-					gap:6px;
-
-					&:hover {
-					background:var(--color90);
-					}
-				}
 			`}
+			className="buttons"
 		>
 			<a
 				href={`https://openstreetmap.org/${featureType}/${id}`}
 				target="_blank"
 				title="Voir la fiche OpenStreetMap de ce lieu"
+				className="button"
 			>
 				<Image
 					src={osmLogo}
@@ -51,6 +30,7 @@ export default function OsmLinks({
 				href={`https://openstreetmap.org/edit?${featureType}=${id}`}
 				target="_blank"
 				title="Ajouter des informations à ce lieu sur OpenStreetMap"
+				className="button"
 			>
 				Compléter ce lieu sur OpenStreetMap
 			</a>

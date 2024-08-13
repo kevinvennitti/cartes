@@ -76,6 +76,9 @@ export default function SimilarNodes({ node }) {
 
 	const closestFeatures =
 		features && sortBy(({ distance }) => distance)(featuresWithDistance)
+
+	if (!closestFeatures || closestFeatures.length === 0) return
+
 	console.log('node', closestFeatures)
 	/*
 	 * Trouver la catégorie du lieu
@@ -93,10 +96,6 @@ export default function SimilarNodes({ node }) {
 	return (
 		<section
 			css={`
-				margin-top: 1rem;
-				padding-top:1rem;
-				border-top:solid 1px var(--separatorColor);
-				
 				h3 {
 					margin:0 0 0.75rem 0;
 					font-size:1.25rem;
@@ -104,32 +103,38 @@ export default function SimilarNodes({ node }) {
 					font-weight:700;
 				}
 			`}
+			className="sidesheet-section"
 		>
 
-			{closestFeatures && (
+			{(
+				closestFeatures
+				&& closestFeatures.length > 0) && (
 				<>
 					{' '}
-					<h3>{title} proches</h3>
+					<h3>{title} à proximité</h3>
 					<NodeList
 						nodes={closestFeatures.slice(0, 10)}
 						setSearchParams={setSearchParams}
 						isOpenByDefault={isOpenByDefault}
 						iconUrl={iconUrl}
 					/>
-					<details
-						css={`
-							margin-top: 1rem;
-							margin-bottom: 0.4rem;
-						`}
-					>
-						<summary>Tous les {title} proches</summary>
-						<NodeList
-							nodes={closestFeatures.slice(10)}
-							setSearchParams={setSearchParams}
-							isOpenByDefault={isOpenByDefault}
-							iconUrl={iconUrl}
-						/>
-					</details>
+					
+					{closestFeatures.length > 10 && (
+						<details
+							css={`
+								margin-top: 1rem;
+								margin-bottom: 0.4rem;
+							`}
+						>
+							<summary>Afficher tout</summary>
+							<NodeList
+								nodes={closestFeatures.slice(10)}
+								setSearchParams={setSearchParams}
+								isOpenByDefault={isOpenByDefault}
+								iconUrl={iconUrl}
+							/>
+						</details>
+					)}
 				</>
 			)}
 		</section>
@@ -138,27 +143,20 @@ export default function SimilarNodes({ node }) {
 
 const NodeList = ({ nodes, setSearchParams, isOpenByDefault, iconUrl = null }) => (
 	<ul
-		css={`
-			list-style-type: none;
-			display:flex;
-			flex-direction:column;
-			gap:4px;
-		`}
+		className="nodes-list"
 	>
 		{nodes.map((f) => {
 			const humanDistance = computeHumanDistance(f.distance * 1000)
 			const oh = f.tags.opening_hours
 			const { isOpen } = oh ? getOh(oh) : {}
 			return (
-				<li key={f.id} css={`
-					display:flex;
-					align-items:center;
-					justify-content:space-between;
-					gap:16px;
-					min-height:28px;
-				`}>
+				<li 
+					key={f.id} 
+					className="nodes-list-item"
+				>
 					
 					<Link
+						className="nodes-list-item-link"
 						href={setSearchParams(
 							{
 								allez: buildAllezPart(
@@ -170,32 +168,9 @@ const NodeList = ({ nodes, setSearchParams, isOpenByDefault, iconUrl = null }) =
 							},
 							true
 						)}
-
-						css={`
-							font-weight:bold;
-							color:var(--textColor) !important;
-							text-decoration:none;
-							line-height:120%;
-							display:flex;
-							align-items:center;
-							justify-content:space-between;
-						`}
 					>
-						<div css={`
-							margin-right:8px;
-							width:36px;
-							height:36px;
-							background:var(--color60);
-							border-radius:8px;
-							flex:none;
-							display:flex;
-							align-items:center;
-							justify-content:center;
-
-							> img {
-							 filter: invert(99%) sepia(100%) saturate(0%) hue-rotate(5deg) brightness(105%) contrast(100%);
-							}
-						`}>
+						<div className="nodes-list-item-label">
+						<div className="nodes-list-item-icon">
 
 							{iconUrl ? (
 								<Image
@@ -215,29 +190,19 @@ const NodeList = ({ nodes, setSearchParams, isOpenByDefault, iconUrl = null }) =
 
 						</div>
 
-						{f.tags.name}
-					</Link>{' '}
-					<small css={`
-							flex:none;
-							display:flex;
-							align-items:center;
-							gap:4px;
-						`}>
-						
-						{!isOpenByDefault &&
-						(oh == null ? (
-							<span
-								css={`
-									display: inline-block;
-									width: 1.8rem;
-								`}
-							></span>
-						) : (
-							<OpenIndicatorInListItem isOpen={isOpen === 'error' ? false : isOpen} />
-						))}
+							{f.tags.name}
+						</div>
+
+						<small className="nodes-list-item-details">
 							
-						à {humanDistance[0]} {humanDistance[1]}
-					</small>
+							{!isOpenByDefault &&
+							(oh != null && (
+								<OpenIndicatorInListItem isOpen={isOpen === 'error' ? false : isOpen} />
+							))}
+								
+							à {humanDistance[0]} {humanDistance[1]}
+						</small>
+					</Link>{' '}
 				</li>
 			)
 		})}
