@@ -34,7 +34,9 @@ export default function BookmarkButton({ geocodedClickedPoint, osmFeature }) {
 	})
 	return (
 		<PlaceButton>
-			<button
+			<div
+				role="button"
+				className="sidesheet-main-action-button"
 				onClick={() =>
 					same
 						? setBookmarks(
@@ -47,16 +49,15 @@ export default function BookmarkButton({ geocodedClickedPoint, osmFeature }) {
 				}
 				title={same ? 'Enlever des favoris' : 'Mettre en favori'}
 			>
-				<div>
-					<Image
-						src={same ? '/ui/star-active.svg' : '/ui/star-inactive.svg'}
-						alt="Icône d'ajout de favori"
-						width="50"
-						height="50"
-					/>
-				</div>
-				<div>Favori</div>
-			</button>
+				<Image
+					src={same ? '/ui/star-active.svg' : '/ui/star-inactive.svg'}
+					alt="Icône d'ajout de favori"
+					width="50"
+					height="50"
+				/>
+					
+				<span>Favori</span>
+			</div>
 		</PlaceButton>
 	)
 }
