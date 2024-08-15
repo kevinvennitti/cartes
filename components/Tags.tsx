@@ -22,13 +22,13 @@ export default function Tags({ tags }) {
 				padding-left: 0;
 				list-style-type: none;
 				line-height: 1.3rem;
+				display: flex;
+				flex-direction: column;
+				
 				img {
 					opacity: 0.7;
 				}
-				display: flex;
-				flex-direction: column;
 			`}
-			className="sidesheet-section"
 		>
 			{tags.map(([raw, [k, v]], i) => (
 				<li

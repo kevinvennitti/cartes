@@ -466,7 +466,19 @@ export default function Content({
 											</summary>
 
 											<div
-												className="place-languages"
+												css={`
+													border: solid 1px var(--lightestColor);
+													background: white;
+													border-radius: 0.5rem;
+													padding: 1rem;
+													margin-top: .5rem;
+													margin-bottom: .5rem;
+
+													ul {
+														list-style: none;
+														padding: 0;
+													}
+												`}
 											>
 												<h2 className="heading-m">
 													Noms dans les autres langues :
@@ -497,7 +509,16 @@ export default function Content({
 									gap:4px;
 								`}>
 									{nameBrezhoneg && nameBrezhoneg !== name && (
-										<small className="place-description-tag">
+										<small
+											css={`
+												color: var(--lightTextColor);
+												text-decoration: none;
+												display: flex;
+												align-items: center;
+												gap: 6px;
+												width: fit-content;	
+											`}
+										>
 											<Emoji extra="1F3F4-E0066-E0072-E0062-E0072-E0065-E007F" />{' '}
 											{nameBrezhoneg}
 										</small>
@@ -505,7 +526,12 @@ export default function Content({
 
 									{description && (
 										<div
-											className="place-description"
+											css={`
+												color: var(--lighterTextColor);
+												max-width: 100%;
+												overflow: hidden;
+												text-overflow: ellipsis;
+											`}
 										>
 											{description}
 										</div>
@@ -528,12 +554,14 @@ export default function Content({
 										/>}
 
 
-									<div css={`
-							line-height:140%;
-							display:flex;
-							flex-direction:column;
-							gap:4px;
-						`}>
+									<div
+										css={`
+											line-height:140%;
+											display:flex;
+											flex-direction:column;
+											gap:4px;
+										`}
+									>
 										<Address tags={tags} />
 
 										<Heritage tags={tags} />

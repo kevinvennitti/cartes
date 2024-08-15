@@ -100,8 +100,9 @@ export default function OsmFeature({ data, transportStopData }) {
 
 	return (
 		<div
-			className="sidesheet-sections"
 			css={`
+  			padding: 1rem;
+
 				> small {
 					line-height: 0.9rem;
 					display: inline-block;
@@ -119,15 +120,38 @@ export default function OsmFeature({ data, transportStopData }) {
 				/>
 			)}
 
-			{wikipedia && wikipedia.includes(':') && <Wikipedia name={wikipedia} />}
+			<div
+				css={`
+					> div {
+						margin-top: 1rem;
+						padding-top: 1rem;
+						border-top: solid 1px var(--separatorColor);
+						position: relative;
 
-			<Brand {...{ brand, brandWikidata, brandWikipedia }} />
+						&:first-child {
+							margin-top: 0;
+							padding-top: 0;
+							border-top: none;
+						}
+					}
+				`}
+			>
 
-			<Tags tags={keyValueTags} />
+				{wikipedia && wikipedia.includes(':') && <Wikipedia name={wikipedia} />}
 
-			{wikidata && <Wikidata id={wikidata} />}
+				<div>
 
-			<SimilarNodes node={data} />
+					<Brand {...{ brand, brandWikidata, brandWikipedia }} />
+
+					<Tags tags={keyValueTags} />
+
+					{wikidata && <Wikidata id={wikidata} />}
+
+				</div>
+
+				<SimilarNodes node={data} />
+
+			</div>
 
 			<OsmLinks data={data} />
 		</div>

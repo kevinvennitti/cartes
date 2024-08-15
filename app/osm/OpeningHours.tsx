@@ -9,8 +9,8 @@ const getStartOfToday = (date) => {
 export const getOh = (opening_hours) => {
 	try {
 		const oh = new parseOpeningHours(opening_hours, {
-				address: { country_code: 'fr' },
-			}),
+			address: { country_code: 'fr' },
+		}),
 			isOpen = oh.getState(),
 			nextChange = oh.getNextChange()
 
@@ -54,34 +54,34 @@ export const OpeningHours = ({ opening_hours }) => {
 	console.log('intervals', intervals)
 	const ohPerDay = intervals
 		? intervals.reduce(
-				(memo, next) => {
-					const [from, to] = next
-					const fromDay = dayFormatter.format(from)
-					const toDay = dayFormatter.format(to)
+			(memo, next) => {
+				const [from, to] = next
+				const fromDay = dayFormatter.format(from)
+				const toDay = dayFormatter.format(to)
 
-					const simple = (h) => hourFormatter.format(h).replace(':00', 'h')
-					const error = toDay !== fromDay
-					const fromHour = simple(from),
-						toHour = simple(to)
-					const range = fromHour + ' - ' + toHour
+				const simple = (h) => hourFormatter.format(h).replace(':00', 'h')
+				const error = toDay !== fromDay
+				const fromHour = simple(from),
+					toHour = simple(to)
+				const range = fromHour + ' - ' + toHour
 
-					return {
-						...memo,
-						[fromDay]: [...(memo[fromDay] || []), range],
-						error: memo.error || error,
-					}
-				},
-				{
-					error: false,
-					lundi: [],
-					mardi: [],
-					mercredi: [],
-					jeudi: [],
-					vendredi: [],
-					samedi: [],
-					dimanche: [],
+				return {
+					...memo,
+					[fromDay]: [...(memo[fromDay] || []), range],
+					error: memo.error || error,
 				}
-		  )
+			},
+			{
+				error: false,
+				lundi: [],
+				mardi: [],
+				mercredi: [],
+				jeudi: [],
+				vendredi: [],
+				samedi: [],
+				dimanche: [],
+			}
+		)
 		: {}
 
 	console.log(ohPerDay)
@@ -110,18 +110,18 @@ export const OpeningHours = ({ opening_hours }) => {
 				<summary title="Voir tous les horaires">
 
 					{isOpen === 'error' && <span>Problème dans les horaires</span>}
-					
+
 					{nextChange === 'error' ? null : !nextChange ? (
 						<>
-						<OpenIndicator isOpen={true} /> 
-						<span css={`color:#07643C;`}>Ouvert 24/24 7j/7</span>
+							<OpenIndicator isOpen={true} />
+							<span css={`color:#07643C;`}>Ouvert 24/24 7j/7</span>
 						</>
 					) : (
 						<>
-						<OpenIndicator isOpen={isOpen === 'error' ? false : isOpen} /> 
-						<span css={`color:${isOpen ? '#07643C' : '#D6162D'};`}>
-							{isOpen ? 'Ouvert' : 'Fermé'} jusqu'à {formatDate(nextChange)}
-						</span>
+							<OpenIndicator isOpen={isOpen === 'error' ? false : isOpen} />
+							<span css={`color:${isOpen ? '#07643C' : '#D6162D'};`}>
+								{isOpen ? 'Ouvert' : 'Fermé'} jusqu'à {formatDate(nextChange)}
+							</span>
 						</>
 					)}
 
@@ -131,48 +131,79 @@ export const OpeningHours = ({ opening_hours }) => {
 						[open] & {
 							transform:rotateZ(-180deg);
 						}
-					`}/>
+					`} />
 				</summary>
 
-				{intervals != null && !ohPerDay.error ? (
-					<ul
-						className="place-opening-hours"
-					>
-						{Object.entries(ohPerDay).map(
-							([day, ranges]) =>
-								day !== 'error' && (
-									<li key={day} css={!ranges.length && `color: gray`}>
-										<span css={`
+				<div
+					css={`
+						padding: .25rem 0 .25rem 1.5rem;
+						width: 100%;
+						position: relative;
+
+						&:after {
+							content: '';
+							display: block;
+							position: absolute;
+							left: 8px;
+							top: 4px;
+							bottom: 4px;
+							width: 4px;
+							border-radius: 8px;
+							background: rgba(0, 0, 0, .2);
+						}
+
+						> li {
+							display: flex;
+							justify-content: space-between;
+							padding: 2px 0;
+						}
+
+						>li>span {
+							margin-right: 2rem;
+						}
+
+						>li>ul {
+							display: flex;
+							list-style-type: none;
+						}
+
+						>li>ul>li {
+							margin: 0 0.4rem;
+						}
+					`}
+				>
+					{intervals != null && !ohPerDay.error ? (
+						<ul>
+							{Object.entries(ohPerDay).map(
+								([day, ranges]) =>
+									day !== 'error' && (
+										<li key={day} css={!ranges.length && `color: gray`}>
+											<span css={`
 											text-transform:capitalize;
 											color:var(--lighterTextColor);	
 											font-weight:500;	
 										`}>{day}</span>
-										<ul css={`
+											<ul css={`
 											font-weight:700;	
 										`}>
-											{ranges.length > 0 ? (
-												ranges.map((hour) => <li key={hour}>{hour}</li>)
-											) : (
-												<span
-													css={`
+												{ranges.length > 0 ? (
+													ranges.map((hour) => <li key={hour}>{hour}</li>)
+												) : (
+													<span
+														css={`
 														margin-right: 0.4rem;
 													`}
-												>
-													Fermé
-												</span>
-											)}
-										</ul>
-									</li>
-								)
-						)}
-					</ul>
-				) : (
-					<div 
-						className="place-opening-hours"
-					>
-					{opening_hours}
-					</div>
-				)}
+													>
+														Fermé
+													</span>
+												)}
+											</ul>
+										</li>
+									)
+							)}
+						</ul>
+					) : opening_hours}
+				</div>
 			</details>
 		</div>
 	)

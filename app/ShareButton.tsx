@@ -19,20 +19,19 @@ export default function ShareButton({ osmFeature, geocodedClickedPoint }) {
 	}, [setNavigatorShare])
 
 	const url = encodeURI(
-		`${urlBase}/?allez=${
-			osmFeature
-				? buildAllezPart(
-						osmFeature.tags?.name,
-						encodePlace(osmFeature.type, osmFeature.id),
-						osmFeature.lon,
-						osmFeature.lat
-				  )
-				: buildAllezPart(
-						'Point sur la carte',
-						null,
-						geocodedClickedPoint.longitude,
-						geocodedClickedPoint.latitude
-				  )
+		`${urlBase}/?allez=${osmFeature
+			? buildAllezPart(
+				osmFeature.tags?.name,
+				encodePlace(osmFeature.type, osmFeature.id),
+				osmFeature.lon,
+				osmFeature.lat
+			)
+			: buildAllezPart(
+				'Point sur la carte',
+				null,
+				geocodedClickedPoint.longitude,
+				geocodedClickedPoint.latitude
+			)
 		}`
 	)
 	const text =
@@ -45,7 +44,6 @@ export default function ShareButton({ osmFeature, geocodedClickedPoint }) {
 			{navigatorShare ? (
 				<div
 					role="button"
-					className="sidesheet-main-action-button"
 					title="Cliquez pour partager le lien"
 					onClick={() => {
 						navigator
@@ -58,9 +56,9 @@ export default function ShareButton({ osmFeature, geocodedClickedPoint }) {
 							.catch((error) => console.log('Error sharing', error))
 					}}
 				>
-					<Image 
-						src="/ui/share.svg" 
-						alt="Icône de partage" 
+					<Image
+						src="/ui/share.svg"
+						alt="Icône de partage"
 					/>
 					<span>Partager</span>
 				</div>
@@ -79,10 +77,10 @@ export const DesktopShareButton = ({ url }) => {
 			function () {
 				setCopySuccess(true)
 				console.log('Async: Copying to clipboard was successful!')
-				
+
 				setTimeout(() => {
 					setCopySuccess(false)
-				},2500)
+				}, 2500)
 			},
 			function (err) {
 				console.error('Async: Could not copy text: ', err)
@@ -95,14 +93,13 @@ export const DesktopShareButton = ({ url }) => {
 	return (
 		<div
 			role="button"
-			className="sidesheet-main-action-button"
 			onClick={copyToClipboard}
 		>
-			<Image 
-				src={shareIcon} 
-				alt="Icône de partage" 
+			<Image
+				src={shareIcon}
+				alt="Icône de partage"
 			/>
-			
+
 			{!copySuccess ? (
 				'Partager'
 			) : (

@@ -71,8 +71,8 @@ export const setAllezPart = (
 			(typeof key === 'string' ? part.key === key : index === key)
 				? value
 				: part
-				? part.key
-				: ''
+					? part.key
+					: ''
 		)
 		.join('->')
 
@@ -90,21 +90,21 @@ export default function SetDestination({
 	const destinationPart =
 		geocodedClickedPoint && !osmFeature
 			? buildAllezPart(
-					'Point sur la carte',
-					null,
-					geocodedClickedPoint.longitude,
-					geocodedClickedPoint.latitude
-			  )
+				'Point sur la carte',
+				null,
+				geocodedClickedPoint.longitude,
+				geocodedClickedPoint.latitude
+			)
 			: searchParams.allez || ''
 
 	const newSearchParams = {
 		allez: geolocation
 			? `${buildAllezPart(
-					'Votre position',
-					null,
-					geolocation.longitude,
-					geolocation.latitude
-			  )}->${destinationPart}`
+				'Votre position',
+				null,
+				geolocation.longitude,
+				geolocation.latitude
+			)}->${destinationPart}`
 			: `->${destinationPart}`,
 	}
 
@@ -119,20 +119,25 @@ export default function SetDestination({
 
 	return (
 		<PlaceButton>
-			<Link href={href} className="sidesheet-main-action-button primary">
+			<Link
+				href={href}
+				className="primary"
+			>
 				<Image
 					src="/ui/go.svg"
 					width="24"
 					height="24"
 					alt="Lancer le mode itinéraire"
 				/>
-				
+
 				{distance ? (
 					<span>
 						À {humanDistance[0]} {humanDistance[1]}
 					</span>
 				) : (
-					<span>Y aller</span>
+					<span>
+						Y aller
+					</span>
 				)}
 			</Link>
 		</PlaceButton>

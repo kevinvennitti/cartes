@@ -103,7 +103,6 @@ export default function SimilarNodes({ node }) {
 					font-weight:700;
 				}
 			`}
-			className="sidesheet-section"
 		>
 
 			{(

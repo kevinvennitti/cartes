@@ -26,14 +26,14 @@ export default function PlaceImages({ panoramaxImages, bboxImages, zoneImages, m
       {mainImage && (
         <FeatureImage
           src={mainImage}
-          className="main-image"
+          isMainImage={true}
         />
       )}
 
       {wikiFeatureImage && (
         <FeatureImage
           src={wikiFeatureImage}
-          className="main-image"
+          isMainImage={true}
         />
       )}
 

@@ -7,8 +7,8 @@ export default function Wikipedia({ name }) {
 	const [text, setText] = useState(null)
 	const [lang, title] = name.split(':')
 	const ApiUrl = `https://${lang}.wikipedia.org/w/api.php?format=json&origin=*&action=query&prop=extracts&explaintext=false&exintro&titles=${encodeURIComponent(
-			title
-		)}&redirects=1`,
+		title
+	)}&redirects=1`,
 		url = `https://${lang}.wikipedia.org/wiki/${title}`
 
 	useEffect(() => {
@@ -27,15 +27,13 @@ export default function Wikipedia({ name }) {
 
 	return (
 		<div
-			className="sidesheet-section"
 			css={`
 				p {
 					margin-bottom:0;
 					position:relative;
 
-					${
-						shortenText?.length > 400 &&
-						`
+					${shortenText?.length > 400 &&
+				`
 					&:after {
 						position: absolute;
 						bottom: 0;
@@ -51,22 +49,22 @@ export default function Wikipedia({ name }) {
 						);
 						pointer-events: none; /* so the text is still selectable */
 					`
-					}
+				}
 				}
 				p > a {
 				
 			`}
 		>
-			
+
 			<p>
 
 				{shortenText}
 
 			</p>
 
-			<a 
-				href={url} 
-				target="_blank" 
+			<a
+				href={url}
+				target="_blank"
 				className="button"
 				css={`
 					margin-top:0.5rem;
@@ -79,7 +77,7 @@ export default function Wikipedia({ name }) {
 					width="25"
 					height="25"
 				/>
-				
+
 				Lire l'article Wikipédia
 			</a>
 		</div>
