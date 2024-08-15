@@ -4,6 +4,7 @@ import Emoji from '@/components/Emoji'
 import OsmLinks from '@/components/OsmLinks'
 import SimilarNodes from '@/components/SimilarNodes'
 import Tags, {
+	Tag,
 	SoloTags,
 	getFrenchAdminLevel,
 	processTags,
@@ -90,11 +91,11 @@ export default function OsmFeature({ data, transportStopData }) {
 
 	const filteredSoloTags = frenchAdminLevel
 		? [
-				...soloTags.filter((tag) => {
-					return !['Limite administrative', 'Frontière'].includes(tag[1][0])
-				}),
-				['hexagone-contour.svg', [frenchAdminLevel]],
-		  ]
+			...soloTags.filter((tag) => {
+				return !['Limite administrative', 'Frontière'].includes(tag[1][0])
+			}),
+			['hexagone-contour.svg', [frenchAdminLevel]],
+		]
 		: soloTags
 
 	return (
@@ -119,13 +120,13 @@ export default function OsmFeature({ data, transportStopData }) {
 			)}
 
 			{wikipedia && wikipedia.includes(':') && <Wikipedia name={wikipedia} />}
-			
+
 			<Brand {...{ brand, brandWikidata, brandWikipedia }} />
-			
+
 			<Tags tags={keyValueTags} />
-			
-				{wikidata && <Wikidata id={wikidata} />}
-			
+
+			{wikidata && <Wikidata id={wikidata} />}
+
 			<SimilarNodes node={data} />
 
 			<OsmLinks data={data} />

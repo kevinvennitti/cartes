@@ -109,54 +109,134 @@ export default function SimilarNodes({ node }) {
 			{(
 				closestFeatures
 				&& closestFeatures.length > 0) && (
-				<>
-					{' '}
-					<h3>{title} à proximité</h3>
-					<NodeList
-						nodes={closestFeatures.slice(0, 10)}
-						setSearchParams={setSearchParams}
-						isOpenByDefault={isOpenByDefault}
-						iconUrl={iconUrl}
-					/>
-					
-					{closestFeatures.length > 10 && (
-						<details
-							css={`
+					<>
+						{' '}
+						<h3>{title} à proximité</h3>
+						<NodeList
+							nodes={closestFeatures.slice(0, 10)}
+							setSearchParams={setSearchParams}
+							isOpenByDefault={isOpenByDefault}
+							iconUrl={iconUrl}
+						/>
+
+						{closestFeatures.length > 10 && (
+							<details
+								css={`
 								margin-top: 1rem;
 								margin-bottom: 0.4rem;
 							`}
-						>
-							<summary>Afficher tout</summary>
-							<NodeList
-								nodes={closestFeatures.slice(10)}
-								setSearchParams={setSearchParams}
-								isOpenByDefault={isOpenByDefault}
-								iconUrl={iconUrl}
-							/>
-						</details>
-					)}
-				</>
-			)}
+							>
+								<summary>Afficher tout</summary>
+								<NodeList
+									nodes={closestFeatures.slice(10)}
+									setSearchParams={setSearchParams}
+									isOpenByDefault={isOpenByDefault}
+									iconUrl={iconUrl}
+								/>
+							</details>
+						)}
+					</>
+				)}
 		</section>
 	)
 }
 
 const NodeList = ({ nodes, setSearchParams, isOpenByDefault, iconUrl = null }) => (
 	<ul
-		className="nodes-list"
+		css={`
+			list-style-type: none;
+			display: flex;
+			flex-direction: column;
+			gap: 4px;
+
+			> li > a {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 16px;
+				min-height: 28px;
+				text-decoration: none;
+				position: relative;
+
+				&:after {
+					content: "";
+					position: absolute;
+					top: 0;
+					left: 0;
+					bottom: 0;
+					right: 0;
+					margin: -4px -.5rem -4px -4px;
+					border-radius: .5rem;
+					display: none;
+				}
+				
+				&:hover:after {
+					display: block;
+					background: var(--color99);
+				}
+				
+				&:active:after {
+					display: block;
+					background: var(--color95);
+				}
+
+				> * {
+					position: relative;
+					z-index: 1;
+				}
+
+				> div {
+				 	font-weight: bold;
+					color: var(--linkColor);
+					text-decoration: none;
+					line-height: 120%;
+					display: flex;
+					align-items: center;
+				}
+
+				&:hover > div {
+					color: var(--linkColorHover);
+					text-decoration: underline;
+				}
+
+				&:hover > small {
+  				color: var(--linkColorHover);
+				}
+
+				> div > div {
+					margin-right: 8px;
+					width: 36px;
+					height: 36px;
+					background: var(--color60);
+					border-radius: 8px;
+					flex: none;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+				}
+
+				> small {
+					flex: none;
+					display: flex;
+					align-items: center;
+					gap: 4px;
+					line-height: 1rem;
+					color: var(--lighterTextColor);
+					font-size: 0.8125rem;
+				}
+			}
+		`}
 	>
 		{nodes.map((f) => {
 			const humanDistance = computeHumanDistance(f.distance * 1000)
 			const oh = f.tags.opening_hours
 			const { isOpen } = oh ? getOh(oh) : {}
 			return (
-				<li 
-					key={f.id} 
-					className="nodes-list-item"
+				<li
+					key={f.id}
 				>
-					
+
 					<Link
-						className="nodes-list-item-link"
 						href={setSearchParams(
 							{
 								allez: buildAllezPart(
@@ -169,37 +249,37 @@ const NodeList = ({ nodes, setSearchParams, isOpenByDefault, iconUrl = null }) =
 							true
 						)}
 					>
-						<div className="nodes-list-item-label">
-						<div className="nodes-list-item-icon">
+						<div>
+							<div>
 
-							{iconUrl ? (
-								<Image
-									src={iconUrl}
-									width="24"
-									height="24"
-									alt="Icône {f.tags.name}"
-								/>
-							) : (
-								<Image
-									src="/ui/adress.svg"
-									width="24"
-									height="24"
-									alt="Icône {f.tags.name}"
-								/>
-							)}
+								{iconUrl ? (
+									<Image
+										src={iconUrl}
+										width="24"
+										height="24"
+										alt={'Icône ' + f.tags.name}
+									/>
+								) : (
+									<Image
+										src="/ui/adress.svg"
+										width="24"
+										height="24"
+										alt="Icône Lieu"
+									/>
+								)}
 
-						</div>
+							</div>
 
 							{f.tags.name}
 						</div>
 
-						<small className="nodes-list-item-details">
-							
+						<small>
+
 							{!isOpenByDefault &&
-							(oh != null && (
-								<OpenIndicatorInListItem isOpen={isOpen === 'error' ? false : isOpen} />
-							))}
-								
+								(oh != null && (
+									<OpenIndicatorInListItem isOpen={isOpen === 'error' ? false : isOpen} />
+								))}
+
 							à {humanDistance[0]} {humanDistance[1]}
 						</small>
 					</Link>{' '}

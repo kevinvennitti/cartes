@@ -162,12 +162,12 @@ const deniveléColor = (height, distance) => {
 		percentage > 5
 			? 0
 			: percentage > 3
-			? 1
-			: percentage > 2
-			? 2
-			: percentage > 1
-			? 3
-			: 4
+				? 1
+				: percentage > 2
+					? 2
+					: percentage > 1
+						? 3
+						: 4
 
 	const difficulty = Math.round(index)
 	return deniveléColors[difficulty]

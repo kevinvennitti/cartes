@@ -186,7 +186,7 @@
 
 .nodes-list-item-icon img,
 .nodes-list-item-icon svg {
-  filter: invert(99%) sepia(100%) saturate(0%) hue-rotate(5deg) brightness(105%) contrast(100%);
+  /* filter: invert(99%) sepia(100%) saturate(0%) hue-rotate(5deg) brightness(105%) contrast(100%); */
 }
 
 .nodes-list-item-details {
@@ -262,21 +262,6 @@
   position: absolute;
   top: 0.9rem;
   right: 0.9rem;
-}
-
-/* sheet header */
-
-.sidesheet-header {
-  background: var(--color99);
-  border-radius: 0.6rem;
-  padding: 1rem;
-  margin-bottom: 1rem;
-}
-
-/* sheet images */
-
-.sidesheet-images {
-  padding: 0 1rem;
 }
 
 /**
@@ -454,36 +439,4 @@
   width: 100%;
   height: 12rem;
   object-fit: cover;
-}
-
-.feature-image-carousel {
-  overflow: scroll;
-  white-space: nowrap;
-  margin: 8px -1rem 0;
-  padding-bottom: 8px;
-}
-
-.feature-image-carousel::-webkit-scrollbar {
-  display: none;
-}
-
-.feature-image-carousel-items {
-  display: flex;
-  list-style-type: none;
-  padding: 0 1rem;
-  gap: 8px;
-}
-
-.feature-image-carousel-items:after {
-  content: '';
-  display: block;
-  position: relative;
-  width: calc(1rem - 8px);
-  height: 1rem;
-  flex: none;
-}
-
-.feature-image-carousel-item {
-  margin:0;
-  padding:0;
 }

@@ -106,7 +106,13 @@ export const tagNameCorrespondance = (key: string) => {
 		'loc_name': 'Nom local',
 		'loc_name:fr': 'Nom local',
 		'old_name:fr': 'Ancien nom',
-		
+		'toilets:wheelchair': 'Toilettes accessibles aux PMR',
+		'bicycle_rental': 'Location de vélos',
+		'network:website': 'Site web du réseau',
+		'network:wikidata': 'ID Wikidata du réseau',
+		'payment:app': 'Paiement par application',
+		'rental': 'Location',
+		'openGeoDB:postal_codes': 'Codes postaux',
 	}[key]
 	return found || key
 }
@@ -116,6 +122,7 @@ export const tagValueCorrespondance = (key: string, tagName: string) => {
 		only: 'Uniquement',
 		subway: 'Métro',
 		metro: 'Métro',
+		city_bike: 'Vélo en libre-service',
 	}
 
 	const specificTranslations = {
@@ -124,13 +131,16 @@ export const tagValueCorrespondance = (key: string, tagName: string) => {
 		},
 		'type:RATP': {
 			'rer': 'RER',
+		},
+		'bicycle_rental': {
+			'docking_station': 'Station de vélos',
 		}
 	}
 
 	const formats = {
 		'route_ref': (v) => v.split(';').join(', '),
 		'Population': (v) => v + ' habitants',
-		// 'opening_hours:url': (v) => "<a href={v}>{v}</a>", // TODO: replace with link
+		'openGeoDB:postal_codes': (v) => v.split(',').join(', '),
 	}
 	
 	return formats[tagName] 
@@ -139,4 +149,14 @@ export const tagValueCorrespondance = (key: string, tagName: string) => {
 			specificTranslations[tagName] 
 			? (specificTranslations[tagName][key] ?? (translations[key] ?? key)) 
 			: (translations[key] ?? key))
+}
+
+export const tagValueHrefCorrespondance = (key: string, tagName: string) => {
+	const formats = {
+		'network:website': key,
+		'brand:website': key,
+		'opening_hours:url': key,
+	}
+
+	return formats[tagName] ?? null
 }

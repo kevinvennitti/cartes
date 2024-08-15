@@ -1,9 +1,11 @@
 import Icons from '@/app/icons/Icons'
+import Link from 'next/link'
 import { isHeritageTag } from '@/app/osm/Heritage'
 import {
 	getTagLabels,
 	tagNameCorrespondance,
 	tagValueCorrespondance,
+	tagValueHrefCorrespondance,
 } from '@/app/osmTagLabels'
 
 const beginningsOfSecondaryTags = ['source', 'fixme:', 'note', 'ref:']
@@ -32,46 +34,67 @@ export default function Tags({ tags }) {
 				<li
 					key={k + v}
 					css={`
-
-						// min-height:26px;
-						
 						${isSecondary(Object.entries(raw)[0]) &&
 						`
 						font-size: 0.8165rem; 
 						order: ${1000 + i};
-						// min-height:24px;
 						`}
 					`}
-				>	
-						<span css={`
-							display:flex;
-							align-items:center;
-							flex-direction:row;
-							gap:4px;
-							margin-right:4px;
-							float:left;
-						`}>
-							<Icons tags={raw}/>
-							
-							<span css={`
-								color:var(--lighterTextColor);
-								`}>
-								{tagNameCorrespondance(k)}
-								{' '}:
-							</span>
-						</span>
-
-						<span css={`
-							font-weight:700;
-							overflow: hidden;
-							text-overflow: ellipsis;
-							max-width: 100%;
-							display: inline-block;
-						`}>{tagValueCorrespondance(v, k)}
-						</span>
+				>
+					<Tag
+						label={tagNameCorrespondance(k)}
+						value={tagValueCorrespondance(v, k)}
+						icons={raw}
+						href={tagValueHrefCorrespondance(v, k)}
+					/>
 				</li>
 			))}
 		</ul>
+	)
+}
+
+
+export function Tag({ label = null, value = null, icons = null, href = null }) {
+	if (!(label && value)) return null
+
+	return (
+		<>
+			<span css={`
+				display:flex;
+				align-items:center;
+				flex-direction:row;
+				gap:4px;
+				margin-right:4px;
+				float:left;
+			`}>
+				<Icons tags={icons} />
+
+				<span css={`
+				color:var(--lighterTextColor);
+				`}>
+					{label}
+					{' '}:
+				</span>
+			</span>
+
+			<span css={`
+				font-weight:700;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				max-width: 100%;
+				display: inline-block;
+			`}>
+				{href ?
+					<Link
+						className="link emphasis"
+						href={href}
+						target="_blank"
+					>
+						{value}
+					</Link>
+					: value}
+			</span >
+		</>
 	)
 }
 const isFrenchAdministration = (tags) => {
@@ -95,12 +118,12 @@ export const getFrenchAdminLevel = (tags, adminLevel) =>
 
 export const processTags = (filteredRest) => {
 	const translatedTags = Object.entries(filteredRest)
-			// Tags to exclude because handled by other components that provide a test function
-			.filter(([k, v]) => !isHeritageTag(k))
-			.map(([key, value]) => {
-				const tagLabels = getTagLabels(key, value)
-				return [{ [key]: value }, tagLabels]
-			}),
+		// Tags to exclude because handled by other components that provide a test function
+		.filter(([k, v]) => !isHeritageTag(k))
+		.map(([key, value]) => {
+			const tagLabels = getTagLabels(key, value)
+			return [{ [key]: value }, tagLabels]
+		}),
 		keyValueTags = translatedTags.filter(([, t]) => t.length === 2),
 		soloTags = translatedTags.filter(([, t]) => t.length === 1)
 
@@ -152,7 +175,7 @@ export function SoloTags({ tags, iconsOnly, compact }) {
 						align-items:center;
 						justify-content:center;
 					`}>
-					<Icons tags={raw} isColored={true}/>
+						<Icons tags={raw} isColored={true} />
 					</span>
 
 					{!iconsOnly && <span css={`

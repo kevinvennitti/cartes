@@ -66,10 +66,13 @@ export function useZoneImages({ latLngClicked, setLatLngClicked }) {
 }
 
 export function ZoneImages({ zoneImages, panoramaxImages, focusImage }) {
-	console.log('panoramax', panoramaxImages)
 
 	const panoramaxImage = panoramaxImages && panoramaxImages[0],
 		panoramaxThumb = panoramaxImage?.assets?.thumb
+
+	console.log('======');
+	console.log('panoramaxImage', panoramaxImage);
+	console.log('panoramaxThumb', panoramaxThumb);
 
 	const images =
 		zoneImages &&
@@ -82,23 +85,53 @@ export function ZoneImages({ zoneImages, panoramaxImages, focusImage }) {
 			}
 		})
 
+	console.log('======');
+	console.log('images', images);
+
 	if (!panoramaxImage && !images) return
 
 	return (
-		<div
-			className="feature-image-carousel"
-		>
-			{(panoramaxThumb || images?.length > 0) && (
-				<ul
-					className="feature-image-carousel-items"
-				>
+		(panoramaxThumb || images?.length > 0) && (
+			<div
+				css={`
+						overflow: scroll;
+						white-space: nowrap;
+						margin: 8px -1rem 0;
+						padding-bottom: 8px;
+						
+						&::-webkit-scrollbar {
+							display: none;
+						}
+	
+						> ul {
+							display: flex;
+							list-style-type: none;
+							padding: 0 1rem;
+							gap: 8px;
+						}
+	
+						> ul:after {
+							content: '';
+							display: block;
+							position: relative;
+							width: calc(1rem - 8px);
+							height: 1rem;
+							flex: none;
+						}
+	
+						> ul > li {
+							margin:0;
+							padding:0;
+						}
+					`}
+			>
+				<ul>
 					{panoramaxThumb && (
 						<a
 							href={`https://api.panoramax.xyz/#focus=pic&map=${window.location.hash.slice(
 								1
 							)}&pic=${panoramaxImage.id}`}
 							target="_blank"
-							className="feature-image-carousel-item"
 						>
 							<div
 								css={`
@@ -131,14 +164,15 @@ export function ZoneImages({ zoneImages, panoramaxImages, focusImage }) {
 							</div>
 						</a>
 					)}
-					{images &&
-						images.length > 0 &&
+
+					{
+						(images &&
+							images.length > 0) &&
 						images.map((image) => {
 							const { url } = image
 							return (
-								<li 
+								<li
 									key={url}
-									className="feature-image-carousel-item"
 								>
 									<button
 										onClick={() => focusImage(image)}
@@ -156,9 +190,10 @@ export function ZoneImages({ zoneImages, panoramaxImages, focusImage }) {
 									</button>
 								</li>
 							)
-						})}
+						})
+					}
 				</ul>
-			)}
-		</div>
-	)
+			</div>
+		))
+
 }

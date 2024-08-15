@@ -3,15 +3,25 @@
 import FeatureImage from './FeatureImage'
 import { ZoneImages } from './ZoneImages'
 
-export default function PlaceImages({panoramaxImages, bboxImages, zoneImages, mainImage, wikiFeatureImage, searchParams, focusImage}) {
+export default function PlaceImages({ panoramaxImages, bboxImages, zoneImages, mainImage, wikiFeatureImage, searchParams, focusImage }) {
 
-  return (panoramaxImages 
-    || bboxImages.length > 0 
-    || zoneImages 
-    || mainImage 
-    || wikiFeatureImage) && (
+  console.log('panoramaxImages', panoramaxImages)
+  console.log('bboxImages', bboxImages)
+  console.log('zoneImages', zoneImages)
+  console.log('mainImage', mainImage)
+  console.log('wikiFeatureImage', wikiFeatureImage)
 
-    <div className="sidesheet-images">
+  return (panoramaxImages
+    || bboxImages.length > 0
+    || zoneImages
+    || mainImage
+    || wikiFeatureImage) ? (
+
+    <div
+      css={`
+          padding: 0 1rem;
+        `}
+    >
 
       {mainImage && (
         <FeatureImage
@@ -38,5 +48,5 @@ export default function PlaceImages({panoramaxImages, bboxImages, zoneImages, ma
       />
 
     </div>
-  )
+  ) : null
 }
