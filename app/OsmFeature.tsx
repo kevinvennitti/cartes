@@ -99,17 +99,11 @@ export default function OsmFeature({ data, transportStopData }) {
 		: soloTags
 
 	return (
-		<div
+		<section
 			css={`
   			padding: 1rem;
-
-				> small {
-					line-height: 0.9rem;
-					display: inline-block;
-				}
 			`}
 		>
-
 
 			{tags.uic_ref && (
 				<GareInfo
@@ -122,7 +116,7 @@ export default function OsmFeature({ data, transportStopData }) {
 
 			<div
 				css={`
-					> div {
+					> * {
 						margin-top: 1rem;
 						padding-top: 1rem;
 						border-top: solid 1px var(--separatorColor);
@@ -139,21 +133,23 @@ export default function OsmFeature({ data, transportStopData }) {
 
 				{wikipedia && wikipedia.includes(':') && <Wikipedia name={wikipedia} />}
 
-				<div>
+				{(brand || brandWikidata || brandWikipedia || keyValueTags.length > 0 || wikidata) && (
+					<div>
 
-					<Brand {...{ brand, brandWikidata, brandWikipedia }} />
+						<Brand {...{ brand, brandWikidata, brandWikipedia }} />
 
-					<Tags tags={keyValueTags} />
+						<Tags tags={keyValueTags} />
 
-					{wikidata && <Wikidata id={wikidata} />}
+						{wikidata && <Wikidata id={wikidata} />}
 
-				</div>
+					</div>
+				)}
 
 				<SimilarNodes node={data} />
 
 			</div>
 
 			<OsmLinks data={data} />
-		</div>
+		</section>
 	)
 }

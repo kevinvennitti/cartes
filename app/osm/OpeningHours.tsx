@@ -152,22 +152,22 @@ export const OpeningHours = ({ opening_hours }) => {
 							background: rgba(0, 0, 0, .2);
 						}
 
-						> li {
+						> ul > li {
 							display: flex;
 							justify-content: space-between;
 							padding: 2px 0;
 						}
 
-						>li>span {
+						> ul >li>span {
 							margin-right: 2rem;
 						}
 
-						>li>ul {
+						> ul >li>ul {
 							display: flex;
 							list-style-type: none;
 						}
 
-						>li>ul>li {
+						> ul >li>ul>li {
 							margin: 0 0.4rem;
 						}
 					`}

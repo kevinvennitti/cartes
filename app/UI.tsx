@@ -43,11 +43,10 @@ export const ModalCloseButtonButton = styled.button`
 	// top: 0rem;
 	// right: 0rem;
 	margin: 0;
-	filter: invert(18%) sepia(96%) saturate(2431%) hue-rotate(198deg) brightness(93%) contrast(91%);
 	border-radius: 2rem;
 	font-size: 150%;
-	width: ${size}rem;
-	height: ${size}rem;
+	width: 36px;
+	height: 36px;
 
 	text-align: center;
 	cursor: pointer;
@@ -56,9 +55,19 @@ export const ModalCloseButtonButton = styled.button`
 	align-items: center;
 	justify-content: center;
 
+	&:hover {
+		background:var(--color95);
+	}
+
+	&:active {
+		background:var(--color90);
+	}
+
 	> img {
-		width: 1;
+		width: 24px;
+		height:24px;
 		margin: 0;
+		filter: invert(18%) sepia(96%) saturate(2431%) hue-rotate(198deg) brightness(93%) contrast(91%);
 	}
 `
 

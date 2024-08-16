@@ -121,9 +121,13 @@ export default function SimilarNodes({ node }) {
 						{closestFeatures.length > 10 && (
 							<details
 								css={`
-								margin-top: 1rem;
-								margin-bottom: 0.4rem;
-							`}
+									margin-top: 1rem;
+									margin-bottom: 0.4rem;
+
+									&[open] > summary {
+										margin-bottom: 1rem;
+									}
+								`}
 							>
 								<summary>Afficher tout</summary>
 								<NodeList
@@ -198,6 +202,10 @@ const NodeList = ({ nodes, setSearchParams, isOpenByDefault, iconUrl = null }) =
 					text-decoration: underline;
 				}
 
+				&:hover > div > div {
+					background-color: var(--color50);
+				}
+
 				&:hover > small {
   				color: var(--linkColorHover);
 				}
@@ -212,6 +220,11 @@ const NodeList = ({ nodes, setSearchParams, isOpenByDefault, iconUrl = null }) =
 					display: flex;
 					align-items: center;
 					justify-content: center;
+				}
+
+				/* turn mapbox/maki/icons icons to white */
+				> div > div > img[src*="https://cdn.jsdelivr.net/gh/mapbox/maki/icons/"] {
+				 	filter: invert(99%) sepia(100%) saturate(0%) hue-rotate(5deg) brightness(105%) contrast(100%);
 				}
 
 				> small {

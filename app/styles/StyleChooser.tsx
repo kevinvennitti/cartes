@@ -11,31 +11,56 @@ export default function StyleChooser({ style, setStyleChooser, setSnap }) {
 	return (
 		<section
 			css={`
+				position: relative;
+  			padding: 1rem;
+
 				h2 {
 					margin-top: 0;
 				}
-				position: relative;
 			`}
 		>
-			<ModalCloseButton
-				title="Fermer l'encart de choix du style"
-				onClick={() => {
-					setTimeout(() => setSnap(3), 200)
-					setSearchParams({ 'choix du style': undefined })
-				}}
-			/>
-			<h2>Choisir le fond de carte</h2>
+
+			<div
+				css={`
+				display:flex;
+				align-items:center;
+				gap:6px;
+				flex:none;
+			`}
+			>
+				<h1
+					className="heading-l"
+					css={`
+						flex:1;
+						margin-bottom:0;
+					`}>
+					Choisir le fond de carte
+				</h1>
+				<ModalCloseButton
+					title="Fermer l'encart de choix du style"
+					onClick={() => {
+						setTimeout(() => setSnap(3), 200)
+						setSearchParams({ 'choix du style': undefined })
+					}}
+				/>
+			</div>
 			<Styles
 				styleList={styleList.filter(([, el]) => !el.secondary)}
 				setSearchParams={setSearchParams}
 				style={style}
 			/>
-			<details>
+			<details
+				css={`
+					margin-top:1rem;
+
+					&[open] > summary {
+						margin-bottom:1rem;
+					}
+				`}
+			>
 				<summary
 					css={`
-						color: #aaa;
-						text-align: right;
-						margin: 1.4rem 3rem 0.8rem 0;
+						color: var(--lighterTextColor);
 					`}
 				>
 					Autres styles
@@ -59,11 +84,12 @@ const Styles = ({ style, styleList, setSearchParams }) => {
 		<ul
 			style={css`
 				display: flex;
-				justify-content: center;
+				justify-content: flex-start;
 				flex-wrap: wrap;
-				align-items: center;
+				align-items: flex-start;
 				list-style-type: none;
-				margin-top: 1rem;
+				margin-top: .5rem;
+				gap:.5rem;
 			`}
 		>
 			{styleList.map(([k, { name, imageAlt, title, image: imageProp }]) => {
@@ -73,7 +99,7 @@ const Styles = ({ style, styleList, setSearchParams }) => {
 					<li
 						key={k}
 						css={`
-							margin: 0.6rem;
+							width:calc((24rem - 1rem) / 3);
 						`}
 					>
 						<Link
@@ -86,8 +112,13 @@ const Styles = ({ style, styleList, setSearchParams }) => {
 								justify-content: center;
 								align-items: center;
 								text-decoration: none;
-								color: inherit;
-								${style.key === k && `color: var(--color); font-weight: bold`}
+								color: var(--lighterTextColor);
+								font-weight:500;
+
+								${style.key === k && `
+									color: var(--color50); 
+									font-weight: bold
+								`}
 							`}
 						>
 							<img
@@ -96,11 +127,15 @@ const Styles = ({ style, styleList, setSearchParams }) => {
 								height="50"
 								alt={imageAlt}
 								css={`
-									width: 5.5rem;
-									height: 5.5rem;
 									border-radius: 0.4rem;
+									width:100%;
+									height:auto;
+									aspect-ratio:1/1;
+									margin-bottom:.25rem;
+									outline:solid 1px rgba(0,0,0,.25);
 									${style.key === k &&
-									`border: 3px solid var(--color);
+									`border: 4px solid var(--color50);
+									outline:none;
 								`}
 								`}
 							/>
